@@ -5,7 +5,7 @@ A work in progress Pokedex that contains information about every Pokemon from th
 I'm working on this in order to practice working with APIs made by others.
 The API I'm using is [PokéAPI](https://pokeapi.co/).
 
-
+## [View Live](https://serenamk.github.io/MyPokedex/)
 _____________________
 _____________________
 
