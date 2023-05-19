@@ -1,9 +1,12 @@
 # MyPokedex
 
+A work in progress Pokedex that contains information about every Pokemon from the Pokemon videogames.
+
+I'm working on this in order to practice working with APIs made by others.
+The API I'm using is [PokéAPI](https://pokeapi.co/).
 
 
-
-
+_____________________
 _____________________
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.10.
