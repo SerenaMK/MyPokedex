@@ -14,6 +14,10 @@ export class PokedexService {
         // Get a list of all Pokemon
         return this.http.get("https://pokeapi.co/api/v2/pokemon")
     }
+    getEveryPokemon() {
+        // Get a list of all Pokemon
+        return this.http.get("https://pokeapi.co/api/v2/pokemon?limit=2000")
+    }
 
     getPokemonById(id: number) {
         return this.http.get("https://pokeapi.co/api/v2/pokemon/" + id)

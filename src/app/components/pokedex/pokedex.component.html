@@ -1,18 +1,32 @@
 <div class="row">
-    <h1 class="text-primary fw-bold">Pokedex</h1>
-    <p class="pt-2 fs-5">
-        Number of Pokemon: <b>{{ pokemon.count }}</b>
-    </p>
+    <div class="col-12">
+        <!-- TITLE -->
+        <h1 class="text-primary fw-bold">Pokedex</h1>
+        <!-- NUMBER OF POKEMON -->
+        <p class="pt-2 fs-5">
+            Number of Pokemon: <b>{{ pokemon.count }}</b>
+        </p>
+        <!-- SEARCH BAR -->
+        <form [formGroup]="pokemonSearch" class="d-flex mb-4 w-50 m-auto" role="search" (ngSubmit)="onSubmit()">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" data-bs-theme="light" formControlName="search">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+
+    </div>
 </div>
 
 <div class="row">
     <div class="col-md-4 offset-md-4">
+        <!-- LIST OF POKEMON -->
         <div class="list-group">
-            <a class="list-group-item list-group-item-action" *ngFor="let thisPokemon of pokemon.results; let i = index" routerLink="/pokemon/{{ (thisPokemon.url).slice(34, (thisPokemon.url).length-1) }}">
+            <a class="list-group-item list-group-item-action" *ngFor="let thisPokemon of pokemon.results; let i = index"
+                routerLink="/pokemon/{{ (thisPokemon.url).slice(34, (thisPokemon.url).length-1) }}">
 
+                <!-- Pokemon Number -->
                 <span class="badge bg-primary-subtle text-dark rounded-pill">
                     # {{ (thisPokemon.url).slice(34, (thisPokemon.url).length-1) }}
                 </span>
+                <!-- Pokemon Name -->
                 <b> {{ thisPokemon.name | titlecase }}</b>
 
             </a>

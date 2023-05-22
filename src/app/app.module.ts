@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { PokemonComponent } from './components/pokemon/pokemon.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PokedexComponent } from './components/pokedex/pokedex.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,9 @@ import { PokedexComponent } from './components/pokedex/pokedex.component';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        HttpClientModule
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: [],
     bootstrap: [AppComponent]

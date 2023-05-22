@@ -17,9 +17,25 @@ export class PokemonComponent implements OnInit {
     ngOnInit(): void {
         this.pokedexService.getPokemonById(this.id).subscribe(data => {
             this.pokemon = data
+            this.replaceHyphens();
 
+            console.log("THIS POKEMON OBJECT:");
             console.log(this.pokemon);
+            console.log("-----------------------------------");
+            console.log("VERSIONS:");
+            console.log(this.pokemon.sprites.versions);
         })
     }
+
+    // Replaces potential hyphens in Pokemon name into spaces
+    replaceHyphens() {
+        if (this.pokemon.name.includes("-")) {
+            this.pokemon.name = this.pokemon.name.replaceAll("-", " ")
+        }
+    }
+
+    // ngDoCheck() {
+    //     this.id = parseInt(this.route.snapshot.paramMap.get("id")!);
+    // }
 
 }

@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-12">
         <p class="m-0">#{{ pokemon.id }}</p>
-        <h1>{{ pokemon.name | titlecase }}</h1>
+        <h1 class="text-primary">{{ pokemon.name | titlecase }}</h1>
     </div>
 </div>
 
@@ -13,43 +13,1494 @@
             <!-- TYPE -->
             <li class="list-group-item">
                 <p class="fw-bold">Type:</p>
-                <p class="m-0" *ngFor="let type of pokemon.types; let i = index">
-                    {{ pokemon.types[i].type.name | titlecase }}
+                <p class="m-0" *ngFor="let pokeType of pokemon.types; let i = index">
+                    {{ pokeType.type.name | titlecase }}
                 </p>
             </li>
 
             <!-- ABILITIES -->
             <li class="list-group-item">
                 <p class="fw-bold">Abilities:</p>
-                <p class="m-0" *ngFor="let ability of pokemon.abilities; let i = index">
-                    {{ pokemon.abilities[i].ability.name | titlecase }}
+                <p class="m-0" *ngFor="let pokemonAbility of pokemon.abilities; let i = index">
+                    {{ pokemonAbility.ability.name | titlecase }}
                 </p>
             </li>
 
         </ul>
     </div>
 
+    <!-- IMAGES -->
     <div class="col-12 col-md-6">
-        <div class="container border">
+
+        <!-- BOX 1 - OFFICIAL ARTWORK -->
+        <div class="container mb-4">
+
             <div class="row">
-                <div class="col-6">
-                    Default<br>
-                    <img src="{{ pokemon.sprites.other['official-artwork'].front_default }}" alt="Image of the pokemon"
-                        width="300px">
-                    <br>
+                <div class="col-12 bg-dark text-white">
+                    <h4 class="mt-1">Official Artwork</h4>
                 </div>
-                <div class="col-6">
-                    Shiny<br>
-                    <img src="{{ pokemon.sprites.other['official-artwork'].front_shiny }}" alt="Image of the pokemon"
-                        width="300px">
-                </div>
-
             </div>
-
-
-
-
+            <div class="row">
+                <!-- DEFAULT -->
+                <div class="col-6 border px-0">
+                    <div class="border-bottom bg-body-secondary">Default</div>
+                    <div>
+                        <img class="img-fluid" src="{{ pokemon.sprites.other['official-artwork'].front_default }}"
+                            alt="front_default">
+                    </div>
+                </div>
+                <!-- SHINY -->
+                <div class="col-6 border px-0">
+                    <div class="border-bottom bg-body-secondary">Shiny</div>
+                    <div>
+                        <img class="img-fluid" src="{{ pokemon.sprites.other['official-artwork'].front_shiny }}"
+                            alt="front_shiny">
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
+        <!-- BOX 2 - SPRITES -->
+        <div class="container">
+            <div class="row">
+                <div class="col-12 bg-dark text-white">
+                    <h4 class="mt-1">Sprites</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 border px-0">
+
+                    <!-- BASIC -->
+                    <div class="d-flex flex-column">
+
+                        <div class="bg-secondary text-white">
+                            <h6 class="mt-1 text-uppercase">Basic</h6>
+                        </div>
+
+                        <!-- Default -->
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3">
+
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Default
+                                    </div>
+                                    <div class="d-flex">
+                                        <div *ngIf="pokemon.sprites.front_default">
+                                            <img src="{{ pokemon.sprites.front_default }}" alt="front_default">
+                                        </div>
+                                        <div *ngIf="pokemon.sprites.back_default">
+                                            <img src="{{ pokemon.sprites.back_default }}" alt="back_default">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny
+                                    </div>
+                                    <div class="d-flex">
+                                        <div *ngIf="pokemon.sprites.front_shiny">
+                                            <img src="{{ pokemon.sprites.front_shiny }}" alt="front_shiny">
+                                        </div>
+                                        <div *ngIf="pokemon.sprites.back_shiny">
+                                            <img src="{{ pokemon.sprites.back_shiny }}" alt="back_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Female -->
+                        <div class="d-flex flex-wrap justify-content-center mb-3"
+                            *ngIf="pokemon.sprites.front_shiny_female">
+
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Female
+                                    </div>
+                                    <div class="d-flex">
+                                        <div *ngIf="pokemon.sprites.front_female">
+                                            <img src="{{ pokemon.sprites.front_female }}" alt="front_female">
+                                        </div>
+                                        <div *ngIf="pokemon.sprites.back_female">
+                                            <img src="{{ pokemon.sprites.back_female }}" alt="back_female">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny female
+                                    </div>
+                                    <div class="d-flex">
+                                        <div *ngIf="pokemon.sprites.front_shiny_female">
+                                            <img src="{{ pokemon.sprites.front_shiny_female }}"
+                                                alt="front_shiny_female">
+                                        </div>
+                                        <div *ngIf="pokemon.sprites.back_shiny_female">
+                                            <img src="{{ pokemon.sprites.back_shiny_female }}" alt="back_shiny_female">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- DREAM WORLD -->
+                    <div class="d-flex flex-column">
+                        <div class="bg-secondary text-white">
+                            <h6 class="mt-1 text-uppercase">Dream world</h6>
+                        </div>
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.other.dream_world.front_default">
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Default
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite" *ngIf="pokemon.sprites.other.dream_world.front_default">
+                                            <img src="{{ pokemon.sprites.other.dream_world.front_default }}"
+                                                class="img-fluid" alt="front_default">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.other.dream_world.front_female">
+                                            <img src="{{ pokemon.sprites.other.dream_world.front_female }}"
+                                                class="img-fluid" alt="front_female">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HOME -->
+                    <div class="d-flex flex-column">
+                        <div class="bg-secondary text-white">
+                            <h6 class="mt-1 text-uppercase">Home</h6>
+                        </div>
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.other.home.front_default">
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Default
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite" *ngIf="pokemon.sprites.other.home.front_default">
+                                            <img src="{{ pokemon.sprites.other.home.front_default }}" class="img-fluid"
+                                                alt="front_default">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.other.home.front_shiny">
+                                            <img src="{{ pokemon.sprites.other.home.front_shiny }}" class="img-fluid"
+                                                alt="front_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-wrap justify-content-center mb-3"
+                            *ngIf="pokemon.sprites.other.home.front_female">
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Female
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite" *ngIf="pokemon.sprites.other.home.front_female">
+                                            <img src="{{ pokemon.sprites.other.home.front_female }}" class="img-fluid"
+                                                alt="front_female">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.other.home.front_shiny_female">
+                                            <img src="{{ pokemon.sprites.other.home.front_shiny_female }}"
+                                                class="img-fluid" alt="front_shiny_female">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VERSIONS -->
+                    <div class="d-flex flex-column">
+                        <div class="bg-secondary text-white">
+                            <h6 class="mt-1 text-uppercase">Versions</h6>
+                        </div>
+
+
+                        <!-------- GENERATION 1 -------->
+                        <div class="border-bottom text-uppercase bg-dark text-white py-2" *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].front_default">
+                            Generation 1
+                        </div>
+
+                        <!-- RED/BLUE -->
+                        <div class="border-bottom red-blue text-white" *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].front_default">
+                            Red / Blue
+                        </div>
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].front_default">
+                            <!-- Default -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Default
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].front_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-i']['red-blue'].front_default }}"
+                                                class="img-fluid px-1" alt="front_default">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-i']['red-blue'].back_default }}" class="img-fluid px-1"
+                                                alt="back_default">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Gray -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Gray
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].front_gray">
+                                            <img src="{{ pokemon.sprites.versions['generation-i']['red-blue'].front_gray }}"
+                                                class="img-fluid px-1" alt="front_gray">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].back_gray">
+                                            <img src="{{ pokemon.sprites.versions['generation-i']['red-blue'].back_gray }}" class="img-fluid px-1"
+                                                alt="back_gray">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3"
+                            *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].front_default">
+                            <!-- Transparent -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Transparent
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].front_transparent">
+                                            <img src="{{ pokemon.sprites.versions['generation-i']['red-blue'].front_transparent }}"
+                                                class="img-fluid" alt="front_transparent">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].back_transparent">
+                                            <img src="{{ pokemon.sprites.versions['generation-i']['red-blue'].back_transparent }}" class="img-fluid"
+                                                alt="back_transparent">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- YELLOW -->
+                        <div class="border-bottom bg-warning" *ngIf="pokemon.sprites.versions['generation-i'].yellow.front_default">
+                            Yellow
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.versions['generation-i'].yellow.front_default">
+                            <!-- Default -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Default
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-i'].yellow.front_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-i'].yellow.front_default }}"
+                                                class="img-fluid px-1" alt="front_default">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-i'].yellow.back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-i'].yellow.back_default }}" class="img-fluid px-1"
+                                                alt="back_default">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Gray -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Gray
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-i'].yellow.front_gray">
+                                            <img src="{{ pokemon.sprites.versions['generation-i'].yellow.front_gray }}"
+                                                class="img-fluid px-1" alt="front_gray">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-i'].yellow.back_gray">
+                                            <img src="{{ pokemon.sprites.versions['generation-i'].yellow.back_gray }}" class="img-fluid px-1"
+                                                alt="back_gray">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3"
+                            *ngIf="pokemon.sprites.versions['generation-i'].yellow.front_default">
+                            <!-- Transparent -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Transparent
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-i'].yellow.front_transparent">
+                                            <img src="{{ pokemon.sprites.versions['generation-i'].yellow.front_transparent }}"
+                                                class="img-fluid" alt="front_transparent">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-i'].yellow.back_transparent">
+                                            <img src="{{ pokemon.sprites.versions['generation-i'].yellow.back_transparent }}" class="img-fluid"
+                                                alt="back_transparent">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-------- GENERATION 2 -------->
+                        <div class="border-bottom text-uppercase bg-dark text-white py-2" *ngIf="pokemon.sprites.versions['generation-ii'].gold.front_default">
+                            Generation 2
+                        </div>
+
+                        <!-- GOLD -->
+                        <div class="border-bottom gold" *ngIf="pokemon.sprites.versions['generation-ii'].gold.front_default">
+                            Gold
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.versions['generation-ii'].gold.front_default">
+                            <!-- Default -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Default
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-ii'].gold.front_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].gold.front_default }}"
+                                                class="img-fluid px-1" alt="front_default">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-ii'].gold.back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].gold.back_default }}" class="img-fluid px-1"
+                                                alt="back_default">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-ii'].gold.front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].gold.front_shiny }}"
+                                                class="img-fluid px-1" alt="front_shiny">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-ii'].gold.back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].gold.back_shiny }}" class="img-fluid px-1"
+                                                alt="back_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3"
+                            *ngIf="pokemon.sprites.versions['generation-ii'].gold.front_default">
+                            <!-- Transparent -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Transparent
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-ii'].gold.front_transparent">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].gold.front_transparent }}"
+                                                class="img-fluid" alt="front_transparent">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SILVER -->
+                        <div class="border-bottom silver" *ngIf="pokemon.sprites.versions['generation-ii'].silver.front_default">
+                            Silver
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.versions['generation-ii'].silver.front_default">
+                            <!-- Default -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Default
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-ii'].silver.front_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].silver.front_default }}"
+                                                class="img-fluid px-1" alt="front_default">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-ii'].silver.back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].silver.back_default }}" class="img-fluid px-1"
+                                                alt="back_default">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-ii'].silver.front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].silver.front_shiny }}"
+                                                class="img-fluid px-1" alt="front_shiny">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-ii'].silver.back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].silver.back_shiny }}" class="img-fluid px-1"
+                                                alt="back_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3"
+                            *ngIf="pokemon.sprites.versions['generation-ii'].silver.front_default">
+                            <!-- Transparent -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Transparent
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-ii'].silver.front_transparent">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].silver.front_transparent }}"
+                                                class="img-fluid" alt="front_transparent">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- CRYSTAL -->
+                        <div class="border-bottom crystal" *ngIf="pokemon.sprites.versions['generation-ii'].crystal.front_default">
+                            Crystal
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.versions['generation-ii'].crystal.front_default">
+                            <!-- Default -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Default
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-ii'].crystal.front_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.front_default }}"
+                                                class="img-fluid px-1" alt="front_default">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-ii'].crystal.back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.back_default }}" class="img-fluid px-1"
+                                                alt="back_default">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-ii'].crystal.front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.front_shiny }}"
+                                                class="img-fluid px-1" alt="front_shiny">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-ii'].crystal.back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.back_shiny }}" class="img-fluid px-1"
+                                                alt="back_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3"
+                            *ngIf="pokemon.sprites.versions['generation-ii'].crystal.front_default">
+                            <!-- Transparent -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Transparent
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-ii'].crystal.front_transparent">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.front_transparent }}"
+                                                class="img-fluid" alt="front_transparent">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-ii'].crystal.back_transparent">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.back_transparent }}" class="img-fluid"
+                                                alt="back_transparent">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny Transparent -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny Transparent
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-ii'].crystal.front_shiny_transparent">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.front_shiny_transparent }}"
+                                                class="img-fluid" alt="front_shiny_transparent">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-ii'].crystal.back_shiny_transparent">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.back_shiny_transparent }}" class="img-fluid"
+                                                alt="back_shiny_transparent">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-------- GENERATION 3 -------->
+                        <div class="border-bottom text-uppercase bg-dark text-white py-2" *ngIf="pokemon.sprites.versions['generation-iii']['ruby-sapphire'].front_default || pokemon.sprites.versions['generation-iii']['firered-leafgreen'].front_default">
+                            Generation 3
+                        </div>
+
+                        <!-- RUBY/SAPPHIRE -->
+                        <div class="border-bottom ruby-sapphire text-white" *ngIf="pokemon.sprites.versions['generation-iii']['ruby-sapphire'].front_default">
+                            Ruby / Sapphire
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.versions['generation-iii']['ruby-sapphire'].front_default">
+                            <!-- Default -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Default
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iii']['ruby-sapphire'].front_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-iii']['ruby-sapphire'].front_default }}"
+                                                class="img-fluid" alt="front_default">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iii']['ruby-sapphire'].back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-iii']['ruby-sapphire'].back_default }}" class="img-fluid"
+                                                alt="back_default">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iii']['ruby-sapphire'].front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iii']['ruby-sapphire'].front_shiny }}"
+                                                class="img-fluid" alt="front_shiny">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iii']['ruby-sapphire'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iii']['ruby-sapphire'].back_shiny }}" class="img-fluid"
+                                                alt="back_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- EMERALD -->
+                        <div class="border-bottom emerald text-white" *ngIf="pokemon.sprites.versions['generation-iii'].emerald.front_default">
+                            Emerald
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.versions['generation-iii'].emerald.front_default">
+                            <!-- Default -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Default
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iii'].emerald.front_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-iii'].emerald.front_default }}"
+                                                class="img-fluid" alt="front_default">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iii'].emerald.front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iii'].emerald.front_shiny }}"
+                                                class="img-fluid" alt="front_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- FIRE RED/LEAF GREEN -->
+                        <div class="border-bottom firered-leafgreen text-white" *ngIf="pokemon.sprites.versions['generation-iii']['firered-leafgreen'].front_default">
+                            FireRed / LeafGreen
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.versions['generation-iii']['firered-leafgreen'].front_default">
+                            <!-- Default -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Default
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iii']['firered-leafgreen'].front_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-iii']['firered-leafgreen'].front_default }}"
+                                                class="img-fluid" alt="front_default">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iii']['firered-leafgreen'].back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-iii']['firered-leafgreen'].back_default }}" class="img-fluid"
+                                                alt="back_default">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iii']['firered-leafgreen'].front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iii']['firered-leafgreen'].front_shiny }}"
+                                                class="img-fluid" alt="front_shiny">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iii']['firered-leafgreen'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iii']['firered-leafgreen'].back_shiny }}" class="img-fluid"
+                                                alt="back_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-------- GENERATION 4 -------->
+                        <div class="border-bottom text-uppercase bg-dark text-white py-2" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_default || pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_default">
+                            Generation 4
+                        </div>
+
+                        <!-- DIAMOND/PEARL -->
+                        <div class="border-bottom diamond-pearl" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_default">
+                            Diamond / Pearl
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_default">
+                            <!-- Default -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Default
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_default }}"
+                                                class="img-fluid" alt="front_default">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_default }}" class="img-fluid"
+                                                alt="back_default">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny }}"
+                                                class="img-fluid" alt="front_shiny">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny }}" class="img-fluid"
+                                                alt="back_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3"
+                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_female">
+                            <!-- Female -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Female
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_female }}"
+                                                class="img-fluid" alt="front_female">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_female }}" class="img-fluid"
+                                                alt="back_female">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny Female -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny Female
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny }}"
+                                                class="img-fluid" alt="front_shiny">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny }}" class="img-fluid"
+                                                alt="back_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- PLATINUM -->
+                        <div class="border-bottom platinum text-white" *ngIf="pokemon.sprites.versions['generation-iv'].platinum.front_default">
+                            Platinum
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_default">
+                            <!-- Default -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Default
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_default }}"
+                                                class="img-fluid" alt="front_default">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_default }}" class="img-fluid"
+                                                alt="back_default">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny }}"
+                                                class="img-fluid" alt="front_shiny">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny }}" class="img-fluid"
+                                                alt="back_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3"
+                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_female">
+                            <!-- Female -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Female
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_female }}"
+                                                class="img-fluid" alt="front_female">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_female }}" class="img-fluid"
+                                                alt="back_female">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny Female -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny Female
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny }}"
+                                                class="img-fluid" alt="front_shiny">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny }}" class="img-fluid"
+                                                alt="back_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- HEART GOLD/SOUL SILVER -->
+                        <div class="border-bottom heartgold-soulsilver" *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_default">
+                            HeartGold / SoulSilver
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_default">
+                            <!-- Default -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Default
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_default }}"
+                                                class="img-fluid" alt="front_default">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_default }}" class="img-fluid"
+                                                alt="back_default">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_shiny }}"
+                                                class="img-fluid" alt="front_shiny">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_shiny }}" class="img-fluid"
+                                                alt="back_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3"
+                            *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_female">
+                            <!-- Female -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Female
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_female }}"
+                                                class="img-fluid" alt="front_female">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_female }}" class="img-fluid"
+                                                alt="back_female">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny Female -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny Female
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_shiny }}"
+                                                class="img-fluid" alt="front_shiny">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_shiny }}" class="img-fluid"
+                                                alt="back_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-------- GENERATION 5 -------->
+                        <div class="border-bottom text-uppercase bg-dark text-white py-2" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].front_default">
+                            Generation 5
+                        </div>
+
+                        <!-- BLACK/WHITE -->
+                        <div class="border-bottom black-white text-white" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].front_default">
+                            Black / White
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].front_default">
+                            <!-- Default -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Default
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].front_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].front_default }}"
+                                                class="img-fluid" alt="front_default">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].back_default }}" class="img-fluid"
+                                                alt="back_default">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].front_shiny }}"
+                                                class="img-fluid" alt="front_shiny">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].back_shiny }}" class="img-fluid"
+                                                alt="back_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3"
+                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].front_female">
+                            <!-- Female -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Female
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].front_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].front_female }}"
+                                                class="img-fluid" alt="front_female">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].back_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].back_female }}" class="img-fluid"
+                                                alt="back_female">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny Female -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny Female
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].front_shiny }}"
+                                                class="img-fluid" alt="front_shiny">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].back_shiny }}" class="img-fluid"
+                                                alt="back_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ANIMATED -->
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.front_default">
+                            <!-- Animated Default -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary px-1">
+                                        Animated Default
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.front_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.front_default }}"
+                                                class="img-fluid" alt="front_default">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.back_default }}" class="img-fluid"
+                                                alt="back_default">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Animated Shiny -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary px-1">
+                                        Animated Shiny
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.front_shiny }}"
+                                                class="img-fluid" alt="front_shiny">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.back_shiny }}" class="img-fluid"
+                                                alt="back_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3"
+                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.front_female">
+                            <!-- Animated Female -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary px-1">
+                                        Animated Female
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.front_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.front_female }}"
+                                                class="img-fluid" alt="front_female">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.back_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.back_female }}" class="img-fluid"
+                                                alt="back_female">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Animated Shiny Female -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary px-1">
+                                        Animated Shiny Female
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.front_shiny }}"
+                                                class="img-fluid" alt="front_shiny">
+                                        </div>
+                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.back_shiny }}" class="img-fluid"
+                                                alt="back_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-------- GENERATION 6 -------->
+                        <div class="border-bottom text-uppercase bg-dark text-white py-2" *ngIf="pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_default">
+                            Generation 6
+                        </div>
+
+                        <!-- OMEGA RUBY/ALPHA SAPPHIRE -->
+                        <div class="border-bottom ruby-sapphire text-white" *ngIf="pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_default || pokemon.sprites.versions['generation-vi']['x-y'].front_default">
+                            OmegaRuby / AlphaSapphire
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_default">
+                            <!-- Default -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Default
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_default }}"
+                                                class="img-fluid" alt="front_default">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_shiny }}"
+                                                class="img-fluid" alt="front_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3"
+                            *ngIf="pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_female">
+                            <!-- Female -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Female
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_female }}"
+                                                class="img-fluid" alt="front_female">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny Female -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny Female
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_shiny }}"
+                                                class="img-fluid" alt="front_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- X/Y -->
+                        <div class="border-bottom x-y text-white" *ngIf="pokemon.sprites.versions['generation-vi']['x-y'].front_default">
+                            X / Y
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.versions['generation-vi']['x-y'].front_default">
+                            <!-- Default -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Default
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite p-2"
+                                            *ngIf="pokemon.sprites.versions['generation-vi']['x-y'].front_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-vi']['x-y'].front_default }}"
+                                                class="img-fluid" alt="front_default">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite p-2"
+                                            *ngIf="pokemon.sprites.versions['generation-vi']['x-y'].front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-vi']['x-y'].front_shiny }}"
+                                                class="img-fluid" alt="front_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3"
+                            *ngIf="pokemon.sprites.versions['generation-vi']['x-y'].front_female">
+                            <!-- Female -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Female
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite p-2"
+                                            *ngIf="pokemon.sprites.versions['generation-vi']['x-y'].front_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-vi']['x-y'].front_female }}"
+                                                class="img-fluid" alt="front_female">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny Female -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny Female
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="sprite p-2"
+                                            *ngIf="pokemon.sprites.versions['generation-vi']['x-y'].front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-vi']['x-y'].front_shiny }}"
+                                                class="img-fluid" alt="front_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-------- GENERATION 7 -------->
+                        <div class="border-bottom text-uppercase bg-dark text-white py-2" *ngIf="pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_default">
+                            Generation 7
+                        </div>
+
+                        <!-- SUN / MOON -->
+                        <div class="border-bottom sun-moon text-white" *ngIf="pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_default">
+                            Sun / Moon
+                            <br>
+                            UltraSun / UltraMoon
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_default">
+                            <!-- Default -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Default
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_default }}"
+                                                class="img-fluid" alt="front_default">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_shiny }}"
+                                                class="img-fluid" alt="front_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3"
+                            *ngIf="pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_female">
+                            <!-- Female -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Female
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_female }}"
+                                                class="img-fluid" alt="front_female">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shiny Female -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Shiny Female
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_shiny }}"
+                                                class="img-fluid" alt="front_shiny">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3"
+                            *ngIf="pokemon.sprites.versions['generation-vii'].icons.front_default">
+                            <!-- Icons -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Icons
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-vii'].icons.front_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-vii'].icons.front_default }}"
+                                                class="img-fluid" alt="front_default">
+                                        </div>
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-vii'].icons.front_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-vii'].icons.front_female }}"
+                                                class="img-fluid" alt="front_female">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-------- GENERATION 8-------->
+                        <div class="border-bottom text-uppercase bg-dark text-white py-2" *ngIf="pokemon.sprites.versions['generation-viii'].icons.front_default">
+                            Generation 8
+                        </div>
+
+                        <!-- SWORD / SHIELD -->
+                        <div class="border-bottom sword-shield text-white" *ngIf="pokemon.sprites.versions['generation-viii'].icons.front_default">
+                            Sword / Shield
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.versions['generation-viii'].icons.front_default">
+                            <!-- Icons -->
+                            <div class="border">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Icons
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-viii'].icons.front_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-viii'].icons.front_default }}"
+                                                class="img-fluid" alt="front_default">
+                                        </div>
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-viii'].icons.front_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-viii'].icons.front_female }}"
+                                                class="img-fluid" alt="front_female">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
