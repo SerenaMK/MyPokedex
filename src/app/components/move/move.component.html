@@ -34,6 +34,7 @@
                                 <table class="table mb-0">
                                     <tbody>
 
+                                        <!-- Type -->
                                         <tr>
                                             <th scope="row">
                                                 Type:
@@ -44,6 +45,7 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        <!-- Power -->
                                         <tr>
                                             <th scope="row">
                                                 Power:
@@ -53,6 +55,7 @@
                                                 <span *ngIf="!move.power">---</span>
                                             </td>
                                         </tr>
+                                        <!-- PP -->
                                         <tr>
                                             <th scope="row">
                                                 PP:
@@ -61,14 +64,17 @@
                                                 {{ move.pp }}
                                             </td>
                                         </tr>
+                                        <!-- Accuracy -->
                                         <tr>
                                             <th scope="row">
                                                 Accuracy:
                                             </th>
                                             <td>
-                                                {{ move.accuracy }}
+                                                <span *ngIf="move.accuracy">{{ move.accuracy }}&percnt;</span>
+                                                <span *ngIf="!move.accuracy">---</span>
                                             </td>
                                         </tr>
+                                        <!-- Priority -->
                                         <tr>
                                             <th scope="row">
                                                 Priority:
@@ -77,6 +83,7 @@
                                                 {{ move.priority }}
                                             </td>
                                         </tr>
+                                        <!-- Effect Chance -->
                                         <tr *ngIf="move.effect_chance">
                                             <th scope="row">
                                                 Effect Chance:
@@ -85,14 +92,16 @@
                                                 {{ move.effect_chance }}
                                             </td>
                                         </tr>
+                                        <!-- Target -->
                                         <tr>
                                             <th scope="row">
                                                 Target:
                                             </th>
                                             <td>
-                                                {{ move.target.name | titlecase }}
+                                                {{ move.target.name | capitalcase }}
                                             </td>
                                         </tr>
+                                        <!-- Damage Class -->
                                         <tr>
                                             <th scope="row">
                                                 Damage Class:
@@ -132,6 +141,7 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        <!-- Crit Rate -->
                                         <tr>
                                             <th scope="row">
                                                 Crit Rate:
@@ -140,14 +150,16 @@
                                                 {{ move.meta.crit_rate }}
                                             </td>
                                         </tr>
+                                        <!-- Category -->
                                         <tr>
                                             <th scope="row">
                                                 Category:
                                             </th>
                                             <td>
-                                                {{ move.meta.category.name | titlecase }}
+                                                {{ move.meta.category.name | capitalcase }}
                                             </td>
                                         </tr>
+                                        <!-- Status Ailment -->
                                         <tr>
                                             <th scope="row">
                                                 Status Ailment:
@@ -156,6 +168,7 @@
                                                 {{ move.meta.ailment.name | titlecase }}
                                             </td>
                                         </tr>
+                                        <!-- Ailment Chance -->
                                         <tr *ngIf="move.meta.ailment.name != 'none'">
                                             <th scope="row">
                                                 Ailment Chance:
@@ -164,6 +177,7 @@
                                                 {{ move.meta.ailment_chance }}
                                             </td>
                                         </tr>
+                                        <!-- Flinch Chance -->
                                         <tr>
                                             <th scope="row">
                                                 Flinch Chance:
@@ -172,6 +186,7 @@
                                                 {{ move.meta.flinch_chance }}
                                             </td>
                                         </tr>
+                                        <!-- Drain -->
                                         <tr>
                                             <th scope="row">
                                                 Drain:
@@ -180,6 +195,7 @@
                                                 {{ move.meta.drain }}&percnt;<br><i>(of damage done)</i>
                                             </td>
                                         </tr>
+                                        <!-- Healing -->
                                         <tr>
                                             <th scope="row">
                                                 Healing:
@@ -188,6 +204,7 @@
                                                 {{ move.meta.healing }}&percnt;<br><i>(of max HP)</i>
                                             </td>
                                         </tr>
+                                        <!-- Hits -->
                                         <tr *ngIf="!move.meta.max_hits">
                                             <th scope="row">
                                                 Hits:
@@ -212,6 +229,7 @@
                                                 {{ move.meta.min_hits }}
                                             </td>
                                         </tr>
+                                        <!-- Turns -->
                                         <tr *ngIf="!move.meta.max_turns">
                                             <th scope="row">
                                                 Turns:
@@ -236,6 +254,7 @@
                                                 {{ move.meta.min_turns }}
                                             </td>
                                         </tr>
+                                        <!-- Stat Change Chance -->
                                         <tr>
                                             <th scope="row">
                                                 Stat Change Chance:
@@ -259,7 +278,7 @@
                     <ul class="list-group">
                         <li class="list-group-item px-0 pb-0">
                             <div class="d-flex flex-column table-responsive">
-                                <div class="fw-bold mb-2">Description:</div>
+                                <div class="fw-bold mb-2">Description</div>
                                 <table class="table mb-0">
                                     <thead>
                                         <tr class="table-danger">
@@ -298,10 +317,10 @@
                 <!-- MACHINES -->
                 <div class="col-12 mb-4" *ngIf="move.machines[0]">
                     <ul class="list-group">
-                        <li class="list-group-item px-0">
+                        <li class="list-group-item px-0 pb-0">
                             <div class="d-flex flex-column">
-                                <div class="fw-bold mb-2">Machines:</div>
-                                <table class="table">
+                                <div class="fw-bold mb-2">Machines</div>
+                                <table class="table mb-0">
                                     <thead>
                                         <tr class="table-danger">
                                             <th scope="col">Game</th>
@@ -336,7 +355,7 @@
                         <li class="list-group-item">
                             <div class="d-flex flex-column">
 
-                                <div class="fw-bold">Learned by:</div>
+                                <div class="fw-bold">Learned by</div>
                                 <!-- <div class="fw-bold">
                                     Learned by:<br>
                                     <i class="fw-normal">(click to expand)</i>
@@ -364,7 +383,7 @@
                     <ul class="list-group">
                         <li class="list-group-item px-0">
                             <div class="d-flex flex-column">
-                                <div class="fw-bold mb-2">Name in different languages:</div>
+                                <div class="fw-bold mb-2">Name in different languages</div>
                                 <table class="table mb-0">
                                     <thead>
                                         <tr class="table-danger">

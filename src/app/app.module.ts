@@ -19,6 +19,7 @@ import { SmallGameComponent } from './components/small-game/small-game.component
 import { SmallPokemonComponent } from './components/small-pokemon/small-pokemon.component';
 import { SmallTypeComponent } from './components/small-type/small-type.component';
 import { SmallItemComponent } from './components/small-item/small-item.component';
+import { CapitalcasePipe } from './pipes/capitalcase.pipe';
 
 @NgModule({
     declarations: [
@@ -36,7 +37,8 @@ import { SmallItemComponent } from './components/small-item/small-item.component
         SmallGameComponent,
         SmallPokemonComponent,
         SmallTypeComponent,
-        SmallItemComponent
+        SmallItemComponent,
+        CapitalcasePipe
     ],
     imports: [
         BrowserModule,

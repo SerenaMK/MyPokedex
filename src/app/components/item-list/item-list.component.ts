@@ -41,7 +41,11 @@ export class ItemListComponent implements OnInit {
 
     onSubmit() {
         // Form value
-        let itemName: string = this.itemSearch.value.search
+        let itemName: string = this.itemSearch.value.search.toLowerCase()
+
+        if (itemName.includes(" ")) {
+            itemName = itemName.replaceAll(" ", "-")
+        }
 
         // Filter items by searched name
         if (itemName) {

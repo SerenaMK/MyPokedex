@@ -41,7 +41,11 @@ export class MoveListComponent implements OnInit {
 
     onSubmit() {
         // Form value
-        let moveName: string = this.moveSearch.value.search
+        let moveName: string = this.moveSearch.value.search.toLowerCase()
+
+        if (moveName.includes(" ")) {
+            moveName = moveName.replaceAll(" ", "-")
+        }
 
         // Filter moves by searched name
         if (moveName) {

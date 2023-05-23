@@ -60,14 +60,6 @@ export class ItemComponent implements OnInit {
             }
         }
 
-        if(this.item.flavor_text_entries[0]) {
-            for (let i = 0; i < this.item.flavor_text_entries.length; i++) {
-                if (this.item.flavor_text_entries[i].version_group.name.includes("-")) {
-                    this.item.flavor_text_entries[i].version_group.name = this.item.flavor_text_entries[i].version_group.name.replaceAll("-", " ")
-                }
-            }
-        }
-
         if(this.item.effect_entries[0]) {
             for (let i = 0; i < this.item.effect_entries.length; i++) {
                 if (this.item.effect_entries[i].effect.includes("\n:   ")) {

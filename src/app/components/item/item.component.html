@@ -47,7 +47,7 @@
                                                 Category:
                                             </th>
                                             <td>
-                                                {{ item.category.name | titlecase }}
+                                                {{ item.category.name | capitalcase }}
                                             </td>
                                         </tr>
                                         <!-- Effect -->
@@ -86,7 +86,7 @@
                                             <td>
                                                 <div class="m-0"
                                                     *ngFor="let attribute of item.attributes; let i = index">
-                                                    {{ attribute.name | titlecase }}
+                                                    {{ attribute.name | capitalcase }}
                                                 </div>
                                             </td>
                                         </tr>
@@ -123,7 +123,7 @@
                     <ul class="list-group">
                         <li class="list-group-item">
                             <div class="d-flex flex-column">
-                                <div class="fw-bold">Held by:</div>
+                                <div class="fw-bold">Held by</div>
 
                                 <div class="py-3 d-flex flex-wrap justify-content-center">
                                     <div class="m-1" *ngFor="let pokemon of item.held_by_pokemon; let i = index">
@@ -144,7 +144,7 @@
                     <ul class="list-group">
                         <li class="list-group-item px-0 pb-0">
                             <div class="d-flex flex-column">
-                                <div class="fw-bold mb-2">Description:</div>
+                                <div class="fw-bold mb-2">Description</div>
                                 <table class="table mb-0">
                                     <thead>
                                         <tr class="table-danger">
@@ -155,8 +155,10 @@
                                     <tbody>
                                         <tr *ngFor="let gameDesc of item.flavor_text_entries
                                         ; let i = index">
-                                            <th scope="row" *ngIf="gameDesc.language.name == 'en'">{{
-                                                gameDesc.version_group.name | titlecase }}</th>
+                                            <th scope="row" *ngIf="gameDesc.language.name == 'en'">
+                                                <!-- {{ gameDesc.version_group.name | titlecase }} -->
+                                                <app-small-game [gameName]="gameDesc.version_group.name"></app-small-game>
+                                            </th>
                                             <td *ngIf="gameDesc.language.name == 'en'">{{ gameDesc.text }}</td>
                                         </tr>
                                     </tbody>
@@ -184,7 +186,7 @@
                     <ul class="list-group">
                         <li class="list-group-item px-0 pb-0">
                             <div class="d-flex flex-column">
-                                <div class="fw-bold mb-2">Game Indices:</div>
+                                <div class="fw-bold mb-2">Game indices</div>
                                 <table class="table mb-0">
                                     <thead>
                                         <tr class="table-danger">
@@ -211,7 +213,7 @@
                     <ul class="list-group">
                         <li class="list-group-item px-0 pb-0">
                             <div class="d-flex flex-column">
-                                <div class="fw-bold mb-2">Name in different languages:</div>
+                                <div class="fw-bold mb-2">Name in different languages</div>
                                 <table class="table mb-0">
                                     <thead>
                                         <tr class="table-danger">

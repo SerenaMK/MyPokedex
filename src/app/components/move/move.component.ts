@@ -25,6 +25,8 @@ export class MoveComponent implements OnInit {
         this.moveService.getMoveById(this.id).subscribe(data => {
             this.move = data
             this.replaceHyphens();
+            console.log(this.move);
+
         })
 
 
@@ -50,6 +52,13 @@ export class MoveComponent implements OnInit {
                     this.move.effect_entries[i].short_effect = this.move.effect_entries[i].short_effect.replaceAll("$effect_chance%", this.move.effect_chance + "%")
                 }
             }
+        }
+
+        if (this.move.meta.category.name.includes("+")) {
+            this.move.meta.category.name = this.move.meta.category.name.replaceAll("+", " + ")
+        }
+        if (this.move.meta.category.name.includes("-")) {
+            this.move.meta.category.name = this.move.meta.category.name.replaceAll("-", " ")
         }
 
     }

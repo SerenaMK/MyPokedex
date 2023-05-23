@@ -42,7 +42,11 @@ export class PokedexComponent implements OnInit {
 
     onSubmit() {
         // Form value
-        let pokemonName: string = this.pokemonSearch.value.search
+        let pokemonName: string = this.pokemonSearch.value.search.toLowerCase()
+
+        if (pokemonName.includes(" ")) {
+            pokemonName = pokemonName.replaceAll(" ", "-")
+        }
 
         // Filter Pokemon by searched name
         if (pokemonName) {
