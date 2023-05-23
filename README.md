@@ -8,6 +8,7 @@ The API I'm using is [PokéAPI](https://pokeapi.co/).
 ## [View Live](https://serenamk.github.io/MyPokedex/)
 
 <img src="https://i.ibb.co/TLfqWX9/my-pokedex.png">
+
 _____________________
 _____________________
 
