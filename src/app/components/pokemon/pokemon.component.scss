@@ -2,59 +2,127 @@
     max-width: 200px;
 }
 
+.list-group-item a {
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.type {
+    border: 1px rgba(128, 128, 128, 0.446) solid;
+    border-radius: 15px;
+    color: white;
+    width: 80px;
+}
+
+
+// TYPE COLORS
+.normal {
+    background-color: #A8A878;
+}
+.fighting {
+    background-color: #C03028;
+}
+.flying {
+    background-color: #A890F0;
+}
+.poison {
+    background-color: #A040A0;
+}
+.ground {
+    background-color: #E0C068;
+}
+.rock {
+    background-color: #B8A038;
+}
+.bug {
+    background-color: #A8B820;
+}
+.ghost {
+    background-color: #705898;
+}
+.steel {
+    background-color: #B8B8D0;
+}
+.fire {
+    background-color: #F08030;
+}
+.water {
+    background-color: #6890F0;
+}
+.grass {
+    background-color: #78C850;
+}
+.electric {
+    background-color: #F8D030;
+}
+.psychic {
+    background-color: #F85888;
+}
+.ice {
+    background-color: #98D8D8;
+}
+.dragon {
+    background-color: #7038F8;
+}
+.dark {
+    background-color: #705848;
+}
+.fairy {
+    background-color: #EE99AC;
+}
+.unknown {
+    background-color: #68A090;
+}
+.shadow {
+    background-color: #68A090;
+}
+
+
+
+// GAMES COLORS
 .red-blue {
     background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(0,9,255,1) 100%);
 }
-
 .gold {
     // background-color: goldenrod;
     background: linear-gradient(90deg, rgba(232,190,0,1) 0%, rgba(205,168,0,1) 50%, rgba(232,190,0,1) 100%);
 }
-
 .silver {
     background: linear-gradient(90deg, rgba(215,215,215,1) 0%, rgba(189,189,189,1) 50%, rgba(215,215,215,1) 100%);
 }
-
 .crystal {
     background-color: lightblue;
 }
-
 .ruby-sapphire {
     background: linear-gradient(90deg, rgb(192, 0, 0) 0%, rgb(0, 6, 194) 100%);
 }
-
 .emerald {
     background-color: green;
 }
-
 .firered-leafgreen {
     background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgb(0, 150, 0) 100%);
 }
-
 .diamond-pearl {
     background: linear-gradient(90deg, lightblue 0%, pink 100%);
 }
-
 .platinum {
     background-color: rgb(112, 112, 112);
 }
-
 .heartgold-soulsilver {
     background: linear-gradient(90deg, rgba(185,185,185,1) 0%, rgba(215,215,215,1) 30%, rgba(209,189,0,1) 65%, rgba(191,173,0,1) 100%);
 }
-
 .black-white {
     background: linear-gradient(90deg, black 0%, white 100%);
 }
-
 .x-y {
     background: linear-gradient(90deg, rgb(59, 63, 77) 0%, rgb(99, 97, 208) 30%, rgb(214, 76, 76) 65%, rgb(61, 49, 49) 100%);
 }
-
 .sun-moon {
     background: linear-gradient(90deg, rgb(243, 158, 1), rgb(122, 26, 201) 100%);
 }
-
 .sword-shield {
     background: linear-gradient(90deg, rgba(42,222,255,1) 0%, rgba(255,57,104,1) 100%);
 }

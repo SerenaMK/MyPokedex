@@ -4,29 +4,28 @@ import { Injectable } from '@angular/core';
 @Injectable({
     providedIn: 'root'
 })
-export class PokedexService {
+export class MoveService {
 
-    api: string = "https://pokeapi.co/api/v2/pokemon"
-    api2: string = "https://pokeapi.co/api/v2/pokemon/"
+    api: string = "https://pokeapi.co/api/v2/move"
+    api2: string = "https://pokeapi.co/api/v2/move/"
 
     constructor(private http: HttpClient) { }
 
-    getAllPokemon() {
+    getAllMoves() {
         return this.http.get(this.api)
     }
-    getEveryPokemon() {
+    getEveryMove() {
         return this.http.get(this.api + "?limit=10000")
     }
 
-    getPokemonById(id: number) {
+    getMoveById(id: number) {
         return this.http.get(this.api2 + id)
     }
-    getPokemonByName(name: string) {
+    getMoveByName(name: string) {
         return this.http.get(this.api2 + name)
     }
 
     getPage(url: string) {
         return this.http.get(url)
     }
-
 }

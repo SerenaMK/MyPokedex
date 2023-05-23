@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container position-relative">
 
     <!-- <div class="row">
         <h1 class="text-center mt-2 mb-4 text-primary opacity-75">MyPokedex</h1>
@@ -8,11 +8,31 @@
     <app-navbar></app-navbar>
 
     <!-- CONTENT -->
-    <div id="main" class="container border text-center p-5 bg-light">
+    <div id="main" class="container text-center p-5">
         <router-outlet></router-outlet>
     </div>
 
     <!-- FOOTER -->
-    <!-- <app-footer></app-footer> -->
+    <app-footer></app-footer>
 
+
+    <!-- MORE -->
+    <div>
+        <!-- SPHERE -->
+        <div class="d-none d-md-block">
+            <div id="pokedex-sphere"></div> -->
+            <div id="pokedex-sphere-around"></div>
+            <div class="pokedex-dot-white white4"></div>
+        </div>
+
+        <!-- COLORED BUTTONS -->
+        <div id="spheres" class="d-sm-block">
+            <div id="pokedex-dot-red"></div>
+            <div class="pokedex-dot-white white1"></div>
+            <div id="pokedex-dot-yellow"></div>
+            <div class="pokedex-dot-white white2"></div>
+            <div id="pokedex-dot-green"></div>
+            <div class="pokedex-dot-white white3"></div>
+        </div>
+    </div>
 </div>

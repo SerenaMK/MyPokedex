@@ -1,40 +1,250 @@
 <div class="row">
-    <div class="col-12">
-        <p class="m-0">#{{ pokemon.id }}</p>
-        <h1 class="text-primary">{{ pokemon.name | titlecase }}</h1>
-    </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" (click)="getPreviousPokemon()">
+                <a class="page-link text-danger" style="cursor: pointer">Previous</a>
+            </li>
+
+            <div class="col-9 col-lg-6 col-xl-4 mb-4">
+                <p class="m-0">#{{ pokemon.id }}</p>
+                <h1 class="text-danger">{{ pokemon.name | titlecase }}</h1>
+            </div>
+
+            <li class="page-item" (click)="getNextPokemon()">
+                <a class="page-link text-danger" style="cursor: pointer">Next</a>
+            </li>
+        </ul>
+    </nav>
 </div>
+
 
 <div class="row">
 
     <div class="col-12 col-md-6">
-        <ul class="list-group">
 
-            <!-- TYPE -->
-            <li class="list-group-item">
-                <p class="fw-bold">Type:</p>
-                <p class="m-0" *ngFor="let pokeType of pokemon.types; let i = index">
-                    {{ pokeType.type.name | titlecase }}
-                </p>
-            </li>
+        <div class="container">
+            <div class="row">
 
-            <!-- ABILITIES -->
-            <li class="list-group-item">
-                <p class="fw-bold">Abilities:</p>
-                <p class="m-0" *ngFor="let pokemonAbility of pokemon.abilities; let i = index">
-                    {{ pokemonAbility.ability.name | titlecase }}
-                </p>
-            </li>
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
 
-        </ul>
+                        <!-- TYPE -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-around">
+                                <div class="fw-bold">Type:</div>
+                                <div>
+                                    <div class="m-0 mb-1 px-2 type"
+                                        *ngFor="let pokeType of pokemon.types; let i = index" [ngClass]="{
+                                        'normal' : pokeType.type.name == 'normal',
+                                        'fighting' : pokeType.type.name == 'fighting',
+                                        'flying' : pokeType.type.name == 'flying',
+                                        'poison' : pokeType.type.name == 'poison',
+                                        'ground' : pokeType.type.name == 'ground',
+                                        'rock' : pokeType.type.name == 'rock',
+                                        'bug' : pokeType.type.name == 'bug',
+                                        'ghost' : pokeType.type.name == 'ghost',
+                                        'steel' : pokeType.type.name == 'steel',
+                                        'fire' : pokeType.type.name == 'fire',
+                                        'water' : pokeType.type.name == 'water',
+                                        'grass' : pokeType.type.name == 'grass',
+                                        'electric' : pokeType.type.name == 'electric',
+                                        'psychic' : pokeType.type.name == 'psychic',
+                                        'ice' : pokeType.type.name == 'ice',
+                                        'dragon' : pokeType.type.name == 'dragon',
+                                        'dark' : pokeType.type.name == 'dark',
+                                        'fairy' : pokeType.type.name == 'fairy',
+                                        'unknown' : pokeType.type.name == 'unknown',
+                                        'shadow' : pokeType.type.name == 'shadow'
+                                    }">
+                                        {{ pokeType.type.name | titlecase }}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Past Types -->
+                        <li class="list-group-item" *ngIf="pokemon.past_types[0]">
+                            <div class="d-flex justify-content-around">
+                                <div class="fw-bold">Past Types:</div>
+                                <div class="d-flex flex-column align-items-center">
+                                    <div class="fst-italic mb-2" style="font-size: 0.8em">
+                                        Up to {{ pokemon.past_types[0].generation.name | uppercase }}
+                                    </div>
+                                    <div class="m-0 mb-1 px-2 type"
+                                        *ngFor="let pokeType of pokemon.past_types[0].types; let i = index" [ngClass]="{
+                                        'normal' : pokeType.type.name == 'normal',
+                                        'fighting' : pokeType.type.name == 'fighting',
+                                        'flying' : pokeType.type.name == 'flying',
+                                        'poison' : pokeType.type.name == 'poison',
+                                        'ground' : pokeType.type.name == 'ground',
+                                        'rock' : pokeType.type.name == 'rock',
+                                        'bug' : pokeType.type.name == 'bug',
+                                        'ghost' : pokeType.type.name == 'ghost',
+                                        'steel' : pokeType.type.name == 'steel',
+                                        'fire' : pokeType.type.name == 'fire',
+                                        'water' : pokeType.type.name == 'water',
+                                        'grass' : pokeType.type.name == 'grass',
+                                        'electric' : pokeType.type.name == 'electric',
+                                        'psychic' : pokeType.type.name == 'psychic',
+                                        'ice' : pokeType.type.name == 'ice',
+                                        'dragon' : pokeType.type.name == 'dragon',
+                                        'dark' : pokeType.type.name == 'dark',
+                                        'fairy' : pokeType.type.name == 'fairy',
+                                        'unknown' : pokeType.type.name == 'unknown',
+                                        'shadow' : pokeType.type.name == 'shadow'
+                                    }">
+                                        {{ pokeType.type.name | titlecase }}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Height -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-around">
+                                <div class="fw-bold">Height:</div>
+                                <div class="m-0">
+                                    {{ pokemon.height / 10 }} m
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Weight -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-around">
+                                <div class="fw-bold">Weight:</div>
+                                <div class="m-0">
+                                    {{ pokemon.weight / 10 }} kg
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- ABILITIES -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-around">
+                                <div class="fw-bold">Abilities:</div>
+                                <div>
+                                    <div class="m-0" *ngFor="let pokemonAbility of pokemon.abilities; let i = index">
+                                        {{ pokemonAbility.ability.name | titlecase }}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Base Experience -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-around">
+                                <div class="fw-bold">Base Experience:</div>
+                                <div class="m-0">
+                                    {{ pokemon.base_experience }}
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Held Items -->
+                        <li class="list-group-item" *ngIf="pokemon.held_items[0]">
+                            <div class="d-flex justify-content-around">
+                                <div class="fw-bold">Held Items:</div>
+                                <div>
+                                    <div class="m-0" *ngFor="let heldItem of pokemon.held_items; let i = index">
+                                        <a href="{{ heldItem.item.url }}">
+                                            {{ heldItem.item.name | titlecase }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+                <!-- STATS -->
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold mb-2">Stats:</div>
+
+                                <table class="table">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Base Stat</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let pokeStat of pokemon.stats
+                                        ; let i = index">
+                                            <th scope="row">{{ pokeStat.stat.name | titlecase }}</th>
+                                            <td>{{ pokeStat.base_stat }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <!-- MOVES -->
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold">Moves:</div>
+                                <div class="py-3">
+                                    <div class="m-0" *ngFor="let pokemonMove of pokemon.moves; let i = index">
+                                        <a href="{{ pokemonMove.move.url }}">
+                                            {{ pokemonMove.move.name | titlecase }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <!-- GAME INDICES -->
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold mb-2">Game Indices:</div>
+
+                                <table class="table">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th scope="col">Game</th>
+                                            <th scope="col">Index</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let gameIndex of pokemon.game_indices
+                                        ; let i = index">
+                                            <th scope="row">{{ gameIndex.version.name | titlecase }}</th>
+                                            <td>{{ gameIndex.game_index }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
     </div>
+
 
     <!-- IMAGES -->
     <div class="col-12 col-md-6">
 
         <!-- BOX 1 - OFFICIAL ARTWORK -->
         <div class="container mb-4">
-
             <div class="row">
                 <div class="col-12 bg-dark text-white">
                     <h4 class="mt-1">Official Artwork</h4>
@@ -42,7 +252,7 @@
             </div>
             <div class="row">
                 <!-- DEFAULT -->
-                <div class="col-6 border px-0">
+                <div class="col-6 border px-0" *ngIf="pokemon.sprites.other['official-artwork'].front_default">
                     <div class="border-bottom bg-body-secondary">Default</div>
                     <div>
                         <img class="img-fluid" src="{{ pokemon.sprites.other['official-artwork'].front_default }}"
@@ -50,7 +260,7 @@
                     </div>
                 </div>
                 <!-- SHINY -->
-                <div class="col-6 border px-0">
+                <div class="col-6 border px-0" *ngIf="pokemon.sprites.other['official-artwork'].front_shiny">
                     <div class="border-bottom bg-body-secondary">Shiny</div>
                     <div>
                         <img class="img-fluid" src="{{ pokemon.sprites.other['official-artwork'].front_shiny }}"
@@ -71,14 +281,15 @@
                 <div class="col-12 border px-0">
 
                     <!-- BASIC -->
-                    <div class="d-flex flex-column">
+                    <div class="d-flex flex-column" *ngIf="pokemon.sprites.front_default">
 
                         <div class="bg-secondary text-white">
                             <h6 class="mt-1 text-uppercase">Basic</h6>
                         </div>
 
                         <!-- Default -->
-                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3">
+                        <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
+                            *ngIf="pokemon.sprites.front_default">
 
                             <div class="border">
                                 <div class="d-flex flex-column">
@@ -156,7 +367,7 @@
                     </div>
 
                     <!-- DREAM WORLD -->
-                    <div class="d-flex flex-column">
+                    <div class="d-flex flex-column" *ngIf="pokemon.sprites.other.dream_world.front_default">
                         <div class="bg-secondary text-white">
                             <h6 class="mt-1 text-uppercase">Dream world</h6>
                         </div>
@@ -183,7 +394,7 @@
                     </div>
 
                     <!-- HOME -->
-                    <div class="d-flex flex-column">
+                    <div class="d-flex flex-column" *ngIf="pokemon.sprites.other.home.front_default">
                         <div class="bg-secondary text-white">
                             <h6 class="mt-1 text-uppercase">Home</h6>
                         </div>
@@ -237,12 +448,14 @@
 
 
                         <!-------- GENERATION 1 -------->
-                        <div class="border-bottom text-uppercase bg-dark text-white py-2" *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].front_default">
+                        <div class="border-bottom text-uppercase bg-dark text-white py-2"
+                            *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].front_default">
                             Generation 1
                         </div>
 
                         <!-- RED/BLUE -->
-                        <div class="border-bottom red-blue text-white" *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].front_default">
+                        <div class="border-bottom red-blue text-white"
+                            *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].front_default">
                             Red / Blue
                         </div>
                         <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
@@ -259,9 +472,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-i']['red-blue'].front_default }}"
                                                 class="img-fluid px-1" alt="front_default">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].back_default">
-                                            <img src="{{ pokemon.sprites.versions['generation-i']['red-blue'].back_default }}" class="img-fluid px-1"
-                                                alt="back_default">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-i']['red-blue'].back_default }}"
+                                                class="img-fluid px-1" alt="back_default">
                                         </div>
                                     </div>
                                 </div>
@@ -278,9 +492,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-i']['red-blue'].front_gray }}"
                                                 class="img-fluid px-1" alt="front_gray">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].back_gray">
-                                            <img src="{{ pokemon.sprites.versions['generation-i']['red-blue'].back_gray }}" class="img-fluid px-1"
-                                                alt="back_gray">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].back_gray">
+                                            <img src="{{ pokemon.sprites.versions['generation-i']['red-blue'].back_gray }}"
+                                                class="img-fluid px-1" alt="back_gray">
                                         </div>
                                     </div>
                                 </div>
@@ -301,9 +516,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-i']['red-blue'].front_transparent }}"
                                                 class="img-fluid" alt="front_transparent">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].back_transparent">
-                                            <img src="{{ pokemon.sprites.versions['generation-i']['red-blue'].back_transparent }}" class="img-fluid"
-                                                alt="back_transparent">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-i']['red-blue'].back_transparent">
+                                            <img src="{{ pokemon.sprites.versions['generation-i']['red-blue'].back_transparent }}"
+                                                class="img-fluid" alt="back_transparent">
                                         </div>
                                     </div>
                                 </div>
@@ -311,7 +527,8 @@
                         </div>
 
                         <!-- YELLOW -->
-                        <div class="border-bottom bg-warning" *ngIf="pokemon.sprites.versions['generation-i'].yellow.front_default">
+                        <div class="border-bottom bg-warning"
+                            *ngIf="pokemon.sprites.versions['generation-i'].yellow.front_default">
                             Yellow
                         </div>
 
@@ -329,9 +546,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-i'].yellow.front_default }}"
                                                 class="img-fluid px-1" alt="front_default">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-i'].yellow.back_default">
-                                            <img src="{{ pokemon.sprites.versions['generation-i'].yellow.back_default }}" class="img-fluid px-1"
-                                                alt="back_default">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-i'].yellow.back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-i'].yellow.back_default }}"
+                                                class="img-fluid px-1" alt="back_default">
                                         </div>
                                     </div>
                                 </div>
@@ -348,9 +566,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-i'].yellow.front_gray }}"
                                                 class="img-fluid px-1" alt="front_gray">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-i'].yellow.back_gray">
-                                            <img src="{{ pokemon.sprites.versions['generation-i'].yellow.back_gray }}" class="img-fluid px-1"
-                                                alt="back_gray">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-i'].yellow.back_gray">
+                                            <img src="{{ pokemon.sprites.versions['generation-i'].yellow.back_gray }}"
+                                                class="img-fluid px-1" alt="back_gray">
                                         </div>
                                     </div>
                                 </div>
@@ -371,9 +590,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-i'].yellow.front_transparent }}"
                                                 class="img-fluid" alt="front_transparent">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-i'].yellow.back_transparent">
-                                            <img src="{{ pokemon.sprites.versions['generation-i'].yellow.back_transparent }}" class="img-fluid"
-                                                alt="back_transparent">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-i'].yellow.back_transparent">
+                                            <img src="{{ pokemon.sprites.versions['generation-i'].yellow.back_transparent }}"
+                                                class="img-fluid" alt="back_transparent">
                                         </div>
                                     </div>
                                 </div>
@@ -382,12 +602,14 @@
 
 
                         <!-------- GENERATION 2 -------->
-                        <div class="border-bottom text-uppercase bg-dark text-white py-2" *ngIf="pokemon.sprites.versions['generation-ii'].gold.front_default">
+                        <div class="border-bottom text-uppercase bg-dark text-white py-2"
+                            *ngIf="pokemon.sprites.versions['generation-ii'].gold.front_default">
                             Generation 2
                         </div>
 
                         <!-- GOLD -->
-                        <div class="border-bottom gold" *ngIf="pokemon.sprites.versions['generation-ii'].gold.front_default">
+                        <div class="border-bottom gold"
+                            *ngIf="pokemon.sprites.versions['generation-ii'].gold.front_default">
                             Gold
                         </div>
 
@@ -405,9 +627,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-ii'].gold.front_default }}"
                                                 class="img-fluid px-1" alt="front_default">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-ii'].gold.back_default">
-                                            <img src="{{ pokemon.sprites.versions['generation-ii'].gold.back_default }}" class="img-fluid px-1"
-                                                alt="back_default">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-ii'].gold.back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].gold.back_default }}"
+                                                class="img-fluid px-1" alt="back_default">
                                         </div>
                                     </div>
                                 </div>
@@ -424,9 +647,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-ii'].gold.front_shiny }}"
                                                 class="img-fluid px-1" alt="front_shiny">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-ii'].gold.back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-ii'].gold.back_shiny }}" class="img-fluid px-1"
-                                                alt="back_shiny">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-ii'].gold.back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].gold.back_shiny }}"
+                                                class="img-fluid px-1" alt="back_shiny">
                                         </div>
                                     </div>
                                 </div>
@@ -453,7 +677,8 @@
                         </div>
 
                         <!-- SILVER -->
-                        <div class="border-bottom silver" *ngIf="pokemon.sprites.versions['generation-ii'].silver.front_default">
+                        <div class="border-bottom silver"
+                            *ngIf="pokemon.sprites.versions['generation-ii'].silver.front_default">
                             Silver
                         </div>
 
@@ -471,9 +696,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-ii'].silver.front_default }}"
                                                 class="img-fluid px-1" alt="front_default">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-ii'].silver.back_default">
-                                            <img src="{{ pokemon.sprites.versions['generation-ii'].silver.back_default }}" class="img-fluid px-1"
-                                                alt="back_default">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-ii'].silver.back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].silver.back_default }}"
+                                                class="img-fluid px-1" alt="back_default">
                                         </div>
                                     </div>
                                 </div>
@@ -490,9 +716,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-ii'].silver.front_shiny }}"
                                                 class="img-fluid px-1" alt="front_shiny">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-ii'].silver.back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-ii'].silver.back_shiny }}" class="img-fluid px-1"
-                                                alt="back_shiny">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-ii'].silver.back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].silver.back_shiny }}"
+                                                class="img-fluid px-1" alt="back_shiny">
                                         </div>
                                     </div>
                                 </div>
@@ -520,7 +747,8 @@
 
 
                         <!-- CRYSTAL -->
-                        <div class="border-bottom crystal" *ngIf="pokemon.sprites.versions['generation-ii'].crystal.front_default">
+                        <div class="border-bottom crystal"
+                            *ngIf="pokemon.sprites.versions['generation-ii'].crystal.front_default">
                             Crystal
                         </div>
 
@@ -538,9 +766,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.front_default }}"
                                                 class="img-fluid px-1" alt="front_default">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-ii'].crystal.back_default">
-                                            <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.back_default }}" class="img-fluid px-1"
-                                                alt="back_default">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-ii'].crystal.back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.back_default }}"
+                                                class="img-fluid px-1" alt="back_default">
                                         </div>
                                     </div>
                                 </div>
@@ -557,9 +786,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.front_shiny }}"
                                                 class="img-fluid px-1" alt="front_shiny">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-ii'].crystal.back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.back_shiny }}" class="img-fluid px-1"
-                                                alt="back_shiny">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-ii'].crystal.back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.back_shiny }}"
+                                                class="img-fluid px-1" alt="back_shiny">
                                         </div>
                                     </div>
                                 </div>
@@ -580,9 +810,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.front_transparent }}"
                                                 class="img-fluid" alt="front_transparent">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-ii'].crystal.back_transparent">
-                                            <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.back_transparent }}" class="img-fluid"
-                                                alt="back_transparent">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-ii'].crystal.back_transparent">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.back_transparent }}"
+                                                class="img-fluid" alt="back_transparent">
                                         </div>
                                     </div>
                                 </div>
@@ -599,9 +830,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.front_shiny_transparent }}"
                                                 class="img-fluid" alt="front_shiny_transparent">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-ii'].crystal.back_shiny_transparent">
-                                            <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.back_shiny_transparent }}" class="img-fluid"
-                                                alt="back_shiny_transparent">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-ii'].crystal.back_shiny_transparent">
+                                            <img src="{{ pokemon.sprites.versions['generation-ii'].crystal.back_shiny_transparent }}"
+                                                class="img-fluid" alt="back_shiny_transparent">
                                         </div>
                                     </div>
                                 </div>
@@ -610,12 +842,14 @@
 
 
                         <!-------- GENERATION 3 -------->
-                        <div class="border-bottom text-uppercase bg-dark text-white py-2" *ngIf="pokemon.sprites.versions['generation-iii']['ruby-sapphire'].front_default || pokemon.sprites.versions['generation-iii']['firered-leafgreen'].front_default">
+                        <div class="border-bottom text-uppercase bg-dark text-white py-2"
+                            *ngIf="pokemon.sprites.versions['generation-iii']['ruby-sapphire'].front_default || pokemon.sprites.versions['generation-iii']['firered-leafgreen'].front_default">
                             Generation 3
                         </div>
 
                         <!-- RUBY/SAPPHIRE -->
-                        <div class="border-bottom ruby-sapphire text-white" *ngIf="pokemon.sprites.versions['generation-iii']['ruby-sapphire'].front_default">
+                        <div class="border-bottom ruby-sapphire text-white"
+                            *ngIf="pokemon.sprites.versions['generation-iii']['ruby-sapphire'].front_default">
                             Ruby / Sapphire
                         </div>
 
@@ -633,9 +867,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-iii']['ruby-sapphire'].front_default }}"
                                                 class="img-fluid" alt="front_default">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iii']['ruby-sapphire'].back_default">
-                                            <img src="{{ pokemon.sprites.versions['generation-iii']['ruby-sapphire'].back_default }}" class="img-fluid"
-                                                alt="back_default">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iii']['ruby-sapphire'].back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-iii']['ruby-sapphire'].back_default }}"
+                                                class="img-fluid" alt="back_default">
                                         </div>
                                     </div>
                                 </div>
@@ -652,9 +887,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-iii']['ruby-sapphire'].front_shiny }}"
                                                 class="img-fluid" alt="front_shiny">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iii']['ruby-sapphire'].back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-iii']['ruby-sapphire'].back_shiny }}" class="img-fluid"
-                                                alt="back_shiny">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iii']['ruby-sapphire'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iii']['ruby-sapphire'].back_shiny }}"
+                                                class="img-fluid" alt="back_shiny">
                                         </div>
                                     </div>
                                 </div>
@@ -662,7 +898,8 @@
                         </div>
 
                         <!-- EMERALD -->
-                        <div class="border-bottom emerald text-white" *ngIf="pokemon.sprites.versions['generation-iii'].emerald.front_default">
+                        <div class="border-bottom emerald text-white"
+                            *ngIf="pokemon.sprites.versions['generation-iii'].emerald.front_default">
                             Emerald
                         </div>
 
@@ -702,7 +939,8 @@
 
 
                         <!-- FIRE RED/LEAF GREEN -->
-                        <div class="border-bottom firered-leafgreen text-white" *ngIf="pokemon.sprites.versions['generation-iii']['firered-leafgreen'].front_default">
+                        <div class="border-bottom firered-leafgreen text-white"
+                            *ngIf="pokemon.sprites.versions['generation-iii']['firered-leafgreen'].front_default">
                             FireRed / LeafGreen
                         </div>
 
@@ -720,9 +958,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-iii']['firered-leafgreen'].front_default }}"
                                                 class="img-fluid" alt="front_default">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iii']['firered-leafgreen'].back_default">
-                                            <img src="{{ pokemon.sprites.versions['generation-iii']['firered-leafgreen'].back_default }}" class="img-fluid"
-                                                alt="back_default">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iii']['firered-leafgreen'].back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-iii']['firered-leafgreen'].back_default }}"
+                                                class="img-fluid" alt="back_default">
                                         </div>
                                     </div>
                                 </div>
@@ -739,9 +978,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-iii']['firered-leafgreen'].front_shiny }}"
                                                 class="img-fluid" alt="front_shiny">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iii']['firered-leafgreen'].back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-iii']['firered-leafgreen'].back_shiny }}" class="img-fluid"
-                                                alt="back_shiny">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iii']['firered-leafgreen'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iii']['firered-leafgreen'].back_shiny }}"
+                                                class="img-fluid" alt="back_shiny">
                                         </div>
                                     </div>
                                 </div>
@@ -750,12 +990,14 @@
 
 
                         <!-------- GENERATION 4 -------->
-                        <div class="border-bottom text-uppercase bg-dark text-white py-2" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_default || pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_default">
+                        <div class="border-bottom text-uppercase bg-dark text-white py-2"
+                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_default || pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_default">
                             Generation 4
                         </div>
 
                         <!-- DIAMOND/PEARL -->
-                        <div class="border-bottom diamond-pearl" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_default">
+                        <div class="border-bottom diamond-pearl"
+                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_default">
                             Diamond / Pearl
                         </div>
 
@@ -773,9 +1015,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_default }}"
                                                 class="img-fluid" alt="front_default">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_default">
-                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_default }}" class="img-fluid"
-                                                alt="back_default">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_default }}"
+                                                class="img-fluid" alt="back_default">
                                         </div>
                                     </div>
                                 </div>
@@ -792,9 +1035,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny }}"
                                                 class="img-fluid" alt="front_shiny">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny }}" class="img-fluid"
-                                                alt="back_shiny">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny }}"
+                                                class="img-fluid" alt="back_shiny">
                                         </div>
                                     </div>
                                 </div>
@@ -815,9 +1059,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_female }}"
                                                 class="img-fluid" alt="front_female">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_female">
-                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_female }}" class="img-fluid"
-                                                alt="back_female">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_female }}"
+                                                class="img-fluid" alt="back_female">
                                         </div>
                                     </div>
                                 </div>
@@ -834,9 +1079,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny }}"
                                                 class="img-fluid" alt="front_shiny">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny }}" class="img-fluid"
-                                                alt="back_shiny">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny }}"
+                                                class="img-fluid" alt="back_shiny">
                                         </div>
                                     </div>
                                 </div>
@@ -845,7 +1091,8 @@
 
 
                         <!-- PLATINUM -->
-                        <div class="border-bottom platinum text-white" *ngIf="pokemon.sprites.versions['generation-iv'].platinum.front_default">
+                        <div class="border-bottom platinum text-white"
+                            *ngIf="pokemon.sprites.versions['generation-iv'].platinum.front_default">
                             Platinum
                         </div>
 
@@ -863,9 +1110,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_default }}"
                                                 class="img-fluid" alt="front_default">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_default">
-                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_default }}" class="img-fluid"
-                                                alt="back_default">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_default }}"
+                                                class="img-fluid" alt="back_default">
                                         </div>
                                     </div>
                                 </div>
@@ -882,9 +1130,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny }}"
                                                 class="img-fluid" alt="front_shiny">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny }}" class="img-fluid"
-                                                alt="back_shiny">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny }}"
+                                                class="img-fluid" alt="back_shiny">
                                         </div>
                                     </div>
                                 </div>
@@ -905,9 +1154,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_female }}"
                                                 class="img-fluid" alt="front_female">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_female">
-                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_female }}" class="img-fluid"
-                                                alt="back_female">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_female }}"
+                                                class="img-fluid" alt="back_female">
                                         </div>
                                     </div>
                                 </div>
@@ -924,9 +1174,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny }}"
                                                 class="img-fluid" alt="front_shiny">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny }}" class="img-fluid"
-                                                alt="back_shiny">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny }}"
+                                                class="img-fluid" alt="back_shiny">
                                         </div>
                                     </div>
                                 </div>
@@ -934,7 +1185,8 @@
                         </div>
 
                         <!-- HEART GOLD/SOUL SILVER -->
-                        <div class="border-bottom heartgold-soulsilver" *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_default">
+                        <div class="border-bottom heartgold-soulsilver"
+                            *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_default">
                             HeartGold / SoulSilver
                         </div>
 
@@ -952,9 +1204,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_default }}"
                                                 class="img-fluid" alt="front_default">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_default">
-                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_default }}" class="img-fluid"
-                                                alt="back_default">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_default }}"
+                                                class="img-fluid" alt="back_default">
                                         </div>
                                     </div>
                                 </div>
@@ -971,9 +1224,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_shiny }}"
                                                 class="img-fluid" alt="front_shiny">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_shiny }}" class="img-fluid"
-                                                alt="back_shiny">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_shiny }}"
+                                                class="img-fluid" alt="back_shiny">
                                         </div>
                                     </div>
                                 </div>
@@ -994,9 +1248,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_female }}"
                                                 class="img-fluid" alt="front_female">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_female">
-                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_female }}" class="img-fluid"
-                                                alt="back_female">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_female }}"
+                                                class="img-fluid" alt="back_female">
                                         </div>
                                     </div>
                                 </div>
@@ -1013,9 +1268,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_shiny }}"
                                                 class="img-fluid" alt="front_shiny">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_shiny }}" class="img-fluid"
-                                                alt="back_shiny">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_shiny }}"
+                                                class="img-fluid" alt="back_shiny">
                                         </div>
                                     </div>
                                 </div>
@@ -1024,12 +1280,14 @@
 
 
                         <!-------- GENERATION 5 -------->
-                        <div class="border-bottom text-uppercase bg-dark text-white py-2" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].front_default">
+                        <div class="border-bottom text-uppercase bg-dark text-white py-2"
+                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].front_default">
                             Generation 5
                         </div>
 
                         <!-- BLACK/WHITE -->
-                        <div class="border-bottom black-white text-white" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].front_default">
+                        <div class="border-bottom black-white text-white"
+                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].front_default">
                             Black / White
                         </div>
 
@@ -1047,9 +1305,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].front_default }}"
                                                 class="img-fluid" alt="front_default">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].back_default">
-                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].back_default }}" class="img-fluid"
-                                                alt="back_default">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].back_default }}"
+                                                class="img-fluid" alt="back_default">
                                         </div>
                                     </div>
                                 </div>
@@ -1066,9 +1325,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].front_shiny }}"
                                                 class="img-fluid" alt="front_shiny">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].back_shiny }}" class="img-fluid"
-                                                alt="back_shiny">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].back_shiny }}"
+                                                class="img-fluid" alt="back_shiny">
                                         </div>
                                     </div>
                                 </div>
@@ -1089,9 +1349,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].front_female }}"
                                                 class="img-fluid" alt="front_female">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].back_female">
-                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].back_female }}" class="img-fluid"
-                                                alt="back_female">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].back_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].back_female }}"
+                                                class="img-fluid" alt="back_female">
                                         </div>
                                     </div>
                                 </div>
@@ -1108,9 +1369,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].front_shiny }}"
                                                 class="img-fluid" alt="front_shiny">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].back_shiny }}" class="img-fluid"
-                                                alt="back_shiny">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].back_shiny }}"
+                                                class="img-fluid" alt="back_shiny">
                                         </div>
                                     </div>
                                 </div>
@@ -1132,9 +1394,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.front_default }}"
                                                 class="img-fluid" alt="front_default">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.back_default">
-                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.back_default }}" class="img-fluid"
-                                                alt="back_default">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.back_default">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.back_default }}"
+                                                class="img-fluid" alt="back_default">
                                         </div>
                                     </div>
                                 </div>
@@ -1151,9 +1414,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.front_shiny }}"
                                                 class="img-fluid" alt="front_shiny">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.back_shiny }}" class="img-fluid"
-                                                alt="back_shiny">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.back_shiny }}"
+                                                class="img-fluid" alt="back_shiny">
                                         </div>
                                     </div>
                                 </div>
@@ -1174,9 +1438,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.front_female }}"
                                                 class="img-fluid" alt="front_female">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.back_female">
-                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.back_female }}" class="img-fluid"
-                                                alt="back_female">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.back_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.back_female }}"
+                                                class="img-fluid" alt="back_female">
                                         </div>
                                     </div>
                                 </div>
@@ -1193,9 +1458,10 @@
                                             <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.front_shiny }}"
                                                 class="img-fluid" alt="front_shiny">
                                         </div>
-                                        <div class="sprite" *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.back_shiny }}" class="img-fluid"
-                                                alt="back_shiny">
+                                        <div class="sprite"
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.back_shiny">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.back_shiny }}"
+                                                class="img-fluid" alt="back_shiny">
                                         </div>
                                     </div>
                                 </div>
@@ -1204,12 +1470,14 @@
 
 
                         <!-------- GENERATION 6 -------->
-                        <div class="border-bottom text-uppercase bg-dark text-white py-2" *ngIf="pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_default">
+                        <div class="border-bottom text-uppercase bg-dark text-white py-2"
+                            *ngIf="pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_default">
                             Generation 6
                         </div>
 
                         <!-- OMEGA RUBY/ALPHA SAPPHIRE -->
-                        <div class="border-bottom ruby-sapphire text-white" *ngIf="pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_default || pokemon.sprites.versions['generation-vi']['x-y'].front_default">
+                        <div class="border-bottom ruby-sapphire text-white"
+                            *ngIf="pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_default || pokemon.sprites.versions['generation-vi']['x-y'].front_default">
                             OmegaRuby / AlphaSapphire
                         </div>
 
@@ -1283,7 +1551,8 @@
 
 
                         <!-- X/Y -->
-                        <div class="border-bottom x-y text-white" *ngIf="pokemon.sprites.versions['generation-vi']['x-y'].front_default">
+                        <div class="border-bottom x-y text-white"
+                            *ngIf="pokemon.sprites.versions['generation-vi']['x-y'].front_default">
                             X / Y
                         </div>
 
@@ -1357,12 +1626,14 @@
 
 
                         <!-------- GENERATION 7 -------->
-                        <div class="border-bottom text-uppercase bg-dark text-white py-2" *ngIf="pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_default">
+                        <div class="border-bottom text-uppercase bg-dark text-white py-2"
+                            *ngIf="pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_default">
                             Generation 7
                         </div>
 
                         <!-- SUN / MOON -->
-                        <div class="border-bottom sun-moon text-white" *ngIf="pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_default">
+                        <div class="border-bottom sun-moon text-white"
+                            *ngIf="pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_default">
                             Sun / Moon
                             <br>
                             UltraSun / UltraMoon
@@ -1462,12 +1733,14 @@
 
 
                         <!-------- GENERATION 8-------->
-                        <div class="border-bottom text-uppercase bg-dark text-white py-2" *ngIf="pokemon.sprites.versions['generation-viii'].icons.front_default">
+                        <div class="border-bottom text-uppercase bg-dark text-white py-2"
+                            *ngIf="pokemon.sprites.versions['generation-viii'].icons.front_default">
                             Generation 8
                         </div>
 
                         <!-- SWORD / SHIELD -->
-                        <div class="border-bottom sword-shield text-white" *ngIf="pokemon.sprites.versions['generation-viii'].icons.front_default">
+                        <div class="border-bottom sword-shield text-white"
+                            *ngIf="pokemon.sprites.versions['generation-viii'].icons.front_default">
                             Sword / Shield
                         </div>
 

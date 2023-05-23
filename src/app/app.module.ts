@@ -9,6 +9,11 @@ import { PokemonComponent } from './components/pokemon/pokemon.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PokedexComponent } from './components/pokedex/pokedex.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FooterComponent } from './components/footer/footer.component';
+import { ItemComponent } from './components/item/item.component';
+import { ItemListComponent } from './components/item-list/item-list.component';
+import { MoveComponent } from './components/move/move.component';
+import { MoveListComponent } from './components/move-list/move-list.component';
 
 @NgModule({
     declarations: [
@@ -16,7 +21,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         HomeComponent,
         PokemonComponent,
         NavbarComponent,
-        PokedexComponent
+        PokedexComponent,
+        FooterComponent,
+        ItemComponent,
+        ItemListComponent,
+        MoveComponent,
+        MoveListComponent
     ],
     imports: [
         BrowserModule,
