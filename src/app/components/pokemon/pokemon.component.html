@@ -147,7 +147,7 @@
                                 <div class="fw-bold">Held Items:</div>
                                 <div>
                                     <div class="m-0" *ngFor="let heldItem of pokemon.held_items; let i = index">
-                                        <a href="{{ heldItem.item.url }}">
+                                        <a href="/item/{{ (heldItem.item.url).slice(31, (heldItem.item.url).length-1) }}">
                                             {{ heldItem.item.name | titlecase }}
                                         </a>
                                     </div>
@@ -196,7 +196,7 @@
                                 <div class="fw-bold">Moves:</div>
                                 <div class="py-3">
                                     <div class="m-0" *ngFor="let pokemonMove of pokemon.moves; let i = index">
-                                        <a href="{{ pokemonMove.move.url }}">
+                                        <a routerLink="/move/{{ (pokemonMove.move.url).slice(31, (pokemonMove.move.url).length-1) }}">
                                             {{ pokemonMove.move.name | titlecase }}
                                         </a>
                                     </div>

@@ -14,3 +14,12 @@
 .slant2 {
     border-radius: 0 100px 0 100px;
 }
+
+.slant a, .slant2 a {
+    text-decoration: none;
+
+    &:hover {
+        font-weight: bold;
+        font-style: italic;
+    }
+}
