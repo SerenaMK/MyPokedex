@@ -14,6 +14,9 @@ import { ItemComponent } from './components/item/item.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { MoveComponent } from './components/move/move.component';
 import { MoveListComponent } from './components/move-list/move-list.component';
+import { SmallMachineComponent } from './components/small-machine/small-machine.component';
+import { SmallGameComponent } from './components/small-game/small-game.component';
+import { SmallPokemonComponent } from './components/small-pokemon/small-pokemon.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +29,10 @@ import { MoveListComponent } from './components/move-list/move-list.component';
         ItemComponent,
         ItemListComponent,
         MoveComponent,
-        MoveListComponent
+        MoveListComponent,
+        SmallMachineComponent,
+        SmallGameComponent,
+        SmallPokemonComponent
     ],
     imports: [
         BrowserModule,

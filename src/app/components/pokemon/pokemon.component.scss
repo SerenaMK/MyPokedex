@@ -2,20 +2,20 @@
     max-width: 200px;
 }
 
-.list-group-item a {
+.type {
+    border: 1px rgba(128, 128, 128, 0.446) solid;
+    border-radius: 15px;
+    color: white;
+    width: 80px;
+}
+
+a {
     text-decoration: none;
 
     &:hover {
         font-weight: bold;
         font-style: italic;
     }
-}
-
-.type {
-    border: 1px rgba(128, 128, 128, 0.446) solid;
-    border-radius: 15px;
-    color: white;
-    width: 80px;
 }
 
 

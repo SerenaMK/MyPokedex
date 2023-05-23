@@ -7,7 +7,7 @@
 
             <div class="col-9 col-lg-6 col-xl-4 mb-4">
                 <p class="m-0">#{{ pokemon.id }}</p>
-                <h1 class="text-danger">{{ pokemon.name | titlecase }}</h1>
+                <h1 class="text-danger fw-bold">{{ pokemon.name | titlecase }}</h1>
             </div>
 
             <li class="page-item" (click)="getNextPokemon()">
@@ -373,6 +373,8 @@
                         </div>
                         <div class="d-flex flex-wrap justify-content-center mb-3 pt-3"
                             *ngIf="pokemon.sprites.other.dream_world.front_default">
+
+                            <!-- Default -->
                             <div class="border">
                                 <div class="d-flex flex-column">
                                     <div class="border-bottom bg-body-secondary">
@@ -383,6 +385,16 @@
                                             <img src="{{ pokemon.sprites.other.dream_world.front_default }}"
                                                 class="img-fluid" alt="front_default">
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Female -->
+                            <div class="border" *ngIf="pokemon.sprites.other.dream_world.front_female">
+                                <div class="d-flex flex-column">
+                                    <div class="border-bottom bg-body-secondary">
+                                        Female
+                                    </div>
+                                    <div class="d-flex">
                                         <div class="sprite" *ngIf="pokemon.sprites.other.dream_world.front_female">
                                             <img src="{{ pokemon.sprites.other.dream_world.front_female }}"
                                                 class="img-fluid" alt="front_female">
@@ -390,6 +402,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
 
@@ -1075,14 +1088,14 @@
                                     </div>
                                     <div class="d-flex">
                                         <div class="sprite"
-                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny }}"
-                                                class="img-fluid" alt="front_shiny">
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny_female }}"
+                                                class="img-fluid" alt="front_shiny_female">
                                         </div>
                                         <div class="sprite"
-                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny }}"
-                                                class="img-fluid" alt="back_shiny">
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny_female }}"
+                                                class="img-fluid" alt="back_shiny_female">
                                         </div>
                                     </div>
                                 </div>
@@ -1170,14 +1183,14 @@
                                     </div>
                                     <div class="d-flex">
                                         <div class="sprite"
-                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny }}"
-                                                class="img-fluid" alt="front_shiny">
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_shiny_female }}"
+                                                class="img-fluid" alt="front_shiny_female">
                                         </div>
                                         <div class="sprite"
-                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny }}"
-                                                class="img-fluid" alt="back_shiny">
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['diamond-pearl'].back_shiny_female }}"
+                                                class="img-fluid" alt="back_shiny_female">
                                         </div>
                                     </div>
                                 </div>
@@ -1264,14 +1277,14 @@
                                     </div>
                                     <div class="d-flex">
                                         <div class="sprite"
-                                            *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_shiny }}"
-                                                class="img-fluid" alt="front_shiny">
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_shiny_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_shiny_female }}"
+                                                class="img-fluid" alt="front_shiny_female">
                                         </div>
                                         <div class="sprite"
-                                            *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_shiny }}"
-                                                class="img-fluid" alt="back_shiny">
+                                            *ngIf="pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_shiny_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].back_shiny_female }}"
+                                                class="img-fluid" alt="back_shiny_female">
                                         </div>
                                     </div>
                                 </div>
@@ -1365,14 +1378,14 @@
                                     </div>
                                     <div class="d-flex">
                                         <div class="sprite"
-                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].front_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].front_shiny }}"
-                                                class="img-fluid" alt="front_shiny">
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].front_shiny_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].front_shiny_female }}"
+                                                class="img-fluid" alt="front_shiny_female">
                                         </div>
                                         <div class="sprite"
-                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].back_shiny }}"
-                                                class="img-fluid" alt="back_shiny">
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].back_shiny_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].back_shiny_female }}"
+                                                class="img-fluid" alt="back_shiny_female">
                                         </div>
                                     </div>
                                 </div>
@@ -1454,14 +1467,14 @@
                                     </div>
                                     <div class="d-flex justify-content-center">
                                         <div class="sprite"
-                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.front_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.front_shiny }}"
-                                                class="img-fluid" alt="front_shiny">
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.front_shiny_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.front_shiny_female }}"
+                                                class="img-fluid" alt="front_shiny_female">
                                         </div>
                                         <div class="sprite"
-                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.back_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.back_shiny }}"
-                                                class="img-fluid" alt="back_shiny">
+                                            *ngIf="pokemon.sprites.versions['generation-v']['black-white'].animated.back_shiny_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-v']['black-white'].animated.back_shiny_female }}"
+                                                class="img-fluid" alt="back_shiny_female">
                                         </div>
                                     </div>
                                 </div>
@@ -1540,9 +1553,9 @@
                                     </div>
                                     <div class="d-flex">
                                         <div class="sprite"
-                                            *ngIf="pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_shiny }}"
-                                                class="img-fluid" alt="front_shiny">
+                                            *ngIf="pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_shiny_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_shiny_female }}"
+                                                class="img-fluid" alt="front_shiny_female">
                                         </div>
                                     </div>
                                 </div>
@@ -1615,9 +1628,9 @@
                                     </div>
                                     <div class="d-flex justify-content-center">
                                         <div class="sprite p-2"
-                                            *ngIf="pokemon.sprites.versions['generation-vi']['x-y'].front_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-vi']['x-y'].front_shiny }}"
-                                                class="img-fluid" alt="front_shiny">
+                                            *ngIf="pokemon.sprites.versions['generation-vi']['x-y'].front_shiny_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-vi']['x-y'].front_shiny_female }}"
+                                                class="img-fluid" alt="front_shiny_female">
                                         </div>
                                     </div>
                                 </div>
@@ -1698,9 +1711,9 @@
                                     </div>
                                     <div class="d-flex">
                                         <div class="sprite"
-                                            *ngIf="pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_shiny">
-                                            <img src="{{ pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_shiny }}"
-                                                class="img-fluid" alt="front_shiny">
+                                            *ngIf="pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_shiny_female">
+                                            <img src="{{ pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_shiny_female }}"
+                                                class="img-fluid" alt="front_shiny_female">
                                         </div>
                                     </div>
                                 </div>

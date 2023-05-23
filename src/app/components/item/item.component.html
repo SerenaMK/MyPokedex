@@ -1,1 +1,307 @@
-<p>item works!</p>
+<div class="row">
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" (click)="getPreviousItem()">
+                <a class="page-link text-danger" style="cursor: pointer">Previous</a>
+            </li>
+
+            <div class="col-9 col-lg-6 col-xl-4 mb-4">
+                <p class="m-0">#{{ item.id }}</p>
+                <h1 class="text-danger fw-bold">{{ item.name | titlecase }}</h1>
+            </div>
+
+            <li class="page-item" (click)="getNextItem()">
+                <a class="page-link text-danger" style="cursor: pointer">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="row">
+
+    <!-- COLUMN 1 -->
+    <div class="col-12 col-md-6">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+
+                        <!-- Sprite -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-around">
+                                <div class="fw-bold">Sprite:</div>
+                                <div class="m-0">
+                                    <img src="{{ item.sprites.default }}" alt="Item sprite">
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Category -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-around">
+                                <div class="fw-bold">Category:</div>
+                                <div class="m-0">
+                                    {{ item.category.name | titlecase }}
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Price -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-around">
+                                <div class="fw-bold">Price:</div>
+                                <div class="m-0">
+                                    {{ item.cost }} <img
+                                        src="https://archives.bulbagarden.net/media/upload/8/8c/Pok%C3%A9monDollar.png"
+                                        alt="Pokédollar symbol">
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <!-- STATS -->
+                <!-- <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold mb-2">Stats:</div>
+
+                                <table class="table">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Base Stat</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let pokeStat of pokemon.stats
+                                        ; let i = index">
+                                            <th scope="row">{{ pokeStat.stat.name | titlecase }}</th>
+                                            <td>{{ pokeStat.base_stat }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div> -->
+
+                <!-- MOVES -->
+                <!-- <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold">Moves:</div>
+                                <div class="py-3">
+                                    <div class="m-0" *ngFor="let pokemonMove of pokemon.moves; let i = index">
+                                        <a routerLink="/move/{{ (pokemonMove.move.url).slice(31, (pokemonMove.move.url).length-1) }}">
+                                            {{ pokemonMove.move.name | titlecase }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div> -->
+
+                <div class="col-12 mb-4" *ngIf="item.held_by_pokemon[0]">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold">Held by:</div>
+
+                                <div class="py-3 collapse d-flex flex-wrap justify-content-center">
+                                    <div class="m-1" *ngFor="let pokemon of item.held_by_pokemon; let i = index">
+                                        <a routerLink="/pokemon/{{ (pokemon.pokemon.url).slice(34, (pokemon.pokemon.url).length-1) }}">
+                                            <app-small-pokemon [pokemonName]="pokemon.pokemon.name"></app-small-pokemon>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+
+                <!-- GAME INDICES -->
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold mb-2">Description:</div>
+                                <table class="table">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th scope="col">Game</th>
+                                            <th scope="col">Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let gameDesc of item.flavor_text_entries
+                                        ; let i = index">
+                                            <th scope="row" *ngIf="gameDesc.language.name == 'en'">{{
+                                                gameDesc.version_group.name | titlecase }}</th>
+                                            <td *ngIf="gameDesc.language.name == 'en'">{{ gameDesc.text }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- GAME INDICES -->
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold mb-2">Game Indices:</div>
+                                <table class="table">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th scope="col">Game</th>
+                                            <th scope="col">Index</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let gameIndex of item.game_indices
+                                        ; let i = index">
+                                            <th scope="row">{{ gameIndex.generation.name | uppercase }}</th>
+                                            <td>{{ gameIndex.game_index }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- COLUMN 2 -->
+    <div class="col-12 col-md-6">
+        <div class="container mb-4">
+            <div class="row">
+
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+
+                        <!-- Effect -->
+                        <li class="list-group-item" *ngIf="item.effect_entries[0]">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold">Effect:</div>
+                                <div class="py-3">
+                                    <div class="m-0" *ngFor="let effect of item.effect_entries; let i = index" style="white-space:pre-wrap">{{ effect.effect }}</div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- ATTRIBUTES -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-around">
+                                <div class="fw-bold">Attributes:</div>
+                                <div>
+                                    <div class="m-0" *ngFor="let attribute of item.attributes; let i = index">
+                                        {{ attribute.name | titlecase }}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- FLING POWER -->
+                        <li class="list-group-item" *ngIf="item.fling_power">
+                            <div class="d-flex justify-content-around">
+                                <div class="fw-bold">Fling Power:</div>
+                                <div class="m-0">
+                                    {{ item.fling_power }}
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- FLING EFFECT -->
+                        <li class="list-group-item" *ngIf="item.fling_effect">
+                            <div class="d-flex justify-content-around">
+                                <div class="fw-bold">Fling Effect:</div>
+                                <div class="m-0">
+                                    {{ item.fling_effect | titlecase }}
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <!-- LANGUAGES -->
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold mb-2">Name in different languages:</div>
+                                <table class="table">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th scope="col">Language</th>
+                                            <th scope="col">Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let thisName of item.names
+                                        ; let i = index">
+                                            <th scope="row" [ngSwitch]="thisName.language.name"
+                                                *ngIf="thisName.language.name != 'ja'">
+                                                <span *ngSwitchCase="'ja-Hrkt'">Japanese</span>
+                                                <span *ngSwitchCase="'ko'">Korean</span>
+                                                <span *ngSwitchCase="'zh-Hant'">Cantonese</span>
+                                                <span *ngSwitchCase="'fr'">French</span>
+                                                <span *ngSwitchCase="'de'">German</span>
+                                                <span *ngSwitchCase="'es'">Spanish</span>
+                                                <span *ngSwitchCase="'it'">Italian</span>
+                                                <span *ngSwitchCase="'en'">English</span>
+                                                <span *ngSwitchCase="'zh-Hans'">Mandarin</span>
+                                            </th>
+                                            <td *ngIf="thisName.language.name != 'ja'">{{ thisName.name }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+
+
+
+
+
+
+
+
+                <!-- <div class="col-6 border px-0" *ngIf="pokemon.sprites.other['official-artwork'].front_default">
+                    <div class="border-bottom bg-body-secondary">Default</div>
+                    <div>
+                        <img class="img-fluid" src="{{ pokemon.sprites.other['official-artwork'].front_default }}"
+                            alt="front_default">
+                    </div>
+                </div>
+
+                <div class="col-6 border px-0" *ngIf="pokemon.sprites.other['official-artwork'].front_shiny">
+                    <div class="border-bottom bg-body-secondary">Shiny</div>
+                    <div>
+                        <img class="img-fluid" src="{{ pokemon.sprites.other['official-artwork'].front_shiny }}"
+                            alt="front_shiny">
+                    </div>
+                </div> -->
+
+            </div>
+        </div>
+    </div>
+
+</div>

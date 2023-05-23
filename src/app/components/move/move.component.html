@@ -1,1 +1,530 @@
-<p>move works!</p>
+<div class="row">
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" (click)="getPreviousMove()">
+                <a class="page-link text-danger" style="cursor: pointer">Previous</a>
+            </li>
+
+            <div class="col-9 col-lg-6 col-xl-4 mb-4">
+                <p class="m-0">#{{ move.id }}</p>
+                <h1 class="text-danger fw-bold">{{ move.name | titlecase }}</h1>
+            </div>
+
+            <li class="page-item" (click)="getNextMove()">
+                <a class="page-link text-danger" style="cursor: pointer">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="row">
+
+    <!-- COLUMN 1 -->
+    <div class="col-12 col-md-6">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+
+                        <!-- Type -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Type:</div>
+                                <div>
+                                    <div class="m-0 mb-1 px-2 type" [ngClass]="{
+                                'normal' : move.type.name == 'normal',
+                                'fighting' : move.type.name == 'fighting',
+                                'flying' : move.type.name == 'flying',
+                                'poison' : move.type.name == 'poison',
+                                'ground' : move.type.name == 'ground',
+                                'rock' : move.type.name == 'rock',
+                                'bug' : move.type.name == 'bug',
+                                'ghost' : move.type.name == 'ghost',
+                                'steel' : move.type.name == 'steel',
+                                'fire' : move.type.name == 'fire',
+                                'water' : move.type.name == 'water',
+                                'grass' : move.type.name == 'grass',
+                                'electric' : move.type.name == 'electric',
+                                'psychic' : move.type.name == 'psychic',
+                                'ice' : move.type.name == 'ice',
+                                'dragon' : move.type.name == 'dragon',
+                                'dark' : move.type.name == 'dark',
+                                'fairy' : move.type.name == 'fairy',
+                                'unknown' : move.type.name == 'unknown',
+                                'shadow' : move.type.name == 'shadow'
+                            }">
+                                        {{ move.type.name | titlecase }}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Power -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Power:</div>
+                                <div class="m-0">
+                                    <span *ngIf="move.power">{{ move.power }}</span>
+                                    <span *ngIf="!move.power">---</span>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- PP -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">PP:</div>
+                                <div class="m-0">
+                                    {{ move.pp }}
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Accuracy -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Accuracy:</div>
+                                <div class="m-0">
+                                    {{ move.accuracy }}
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Priority -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Priority:</div>
+                                <div class="m-0">
+                                    {{ move.priority }}
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Effect Chance -->
+                        <li class="list-group-item" *ngIf="move.effect_chance">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Effect Chance:</div>
+                                <div class="m-0">
+                                    {{ move.effect_chance }}
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <!-- DESCRIPTION -->
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold mb-2">Description:</div>
+                                <table class="table">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th scope="col">Game</th>
+                                            <th scope="col">Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let gameDesc of move.flavor_text_entries
+                                        ; let i = index">
+                                            <th scope="row" *ngIf="gameDesc.language.name == 'en'">
+                                                <app-small-game [gameName]="gameDesc.version_group.name"></app-small-game>
+                                            </th>
+                                            <td *ngIf="gameDesc.language.name == 'en'">{{ gameDesc.flavor_text }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- LEARNED BY POKEMON -->
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex flex-column">
+
+                                <div class="fw-bold">Learned by:</div>
+                                <!-- <div class="fw-bold">
+                                    Learned by:<br>
+                                    <i class="fw-normal">(click to expand)</i>
+                                </div> -->
+
+                                <div class="py-3 collapse d-flex flex-wrap justify-content-center">
+
+                                    <div class="m-1" *ngFor="let pokemon of move.learned_by_pokemon; let i = index">
+                                        <a routerLink="/pokemon/{{ (pokemon.url).slice(34, (pokemon.url).length-1) }}">
+                                            <app-small-pokemon [pokemonName]="move.learned_by_pokemon[i].name"></app-small-pokemon>
+                                        </a>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- COLUMN 2 -->
+    <div class="col-12 col-md-6">
+        <div class="container mb-4">
+            <div class="row">
+
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+
+                        <!-- Target -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Target:</div>
+                                <div class="m-0">
+                                    {{ move.target.name | titlecase }}
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Damage class -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Damage class:</div>
+                                <div class="m-0">
+                                    <span *ngIf="move.damage_class.name == 'physical'">
+                                        <img src="https://archives.bulbagarden.net/media/upload/9/92/PhysicalIC_HGSS.png" alt="Physical">
+                                        {{ move.damage_class.name | titlecase }}
+                                    </span>
+                                    <span *ngIf="move.damage_class.name == 'special'">
+                                        <img src="https://archives.bulbagarden.net/media/upload/8/80/SpecialIC_HGSS.png" alt="Special">
+                                        {{ move.damage_class.name | titlecase }}
+                                    </span>
+                                    <span *ngIf="move.damage_class.name == 'status'">
+                                        <img src="https://archives.bulbagarden.net/media/upload/f/f6/StatusIC_HGSS.png" alt="Status">
+                                        {{ move.damage_class.name | titlecase }}
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Effect -->
+                        <li class="list-group-item" *ngIf="move.effect_entries[0]">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold">Effect:</div>
+                                <div class="pb-3 pt-2">
+                                    <div class="m-0" *ngFor="let effect of move.effect_entries; let i = index"
+                                        style="white-space:pre-wrap">{{ effect.effect }}
+
+                                        <p class="pt-4 mb-2 fw-bold">In short:</p>
+                                        {{ effect.short_effect }}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <!-- METADATA -->
+                <div class="col-12 mb-4" *ngIf="move.meta">
+                    <ul class="list-group">
+
+                        <!-- Crit Rate -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Crit Rate:</div>
+                                <div class="m-0">
+                                    {{ move.meta.crit_rate }}
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Category -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Category:</div>
+                                <div class="m-0">
+                                    {{ move.meta.category.name | titlecase }}
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Status Ailment -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Status Ailment:</div>
+                                <div class="m-0">
+                                    {{ move.meta.ailment.name | titlecase }}
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Ailment Chance -->
+                        <li class="list-group-item" *ngIf="move.meta.ailment.name != 'none'">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Ailment Chance:</div>
+                                <div class="m-0">
+                                    {{ move.meta.ailment_chance }}
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Flinch Chance -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Flinch Chance:</div>
+                                <div class="m-0">
+                                    {{ move.meta.flinch_chance }}
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Drain -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Drain:</div>
+                                <div class="m-0">
+                                    {{ move.meta.drain }}&percnt;<br><i>(of damage done)</i>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Healing -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Healing:</div>
+                                <div class="m-0">
+                                    {{ move.meta.healing }}&percnt;<br><i>(of max HP)</i>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Hits -->
+                        <li class="list-group-item" *ngIf="!move.meta.max_hits">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Hits:</div>
+                                <div class="m-0">
+                                    1
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Max Hits -->
+                        <li class="list-group-item" *ngIf="move.meta.max_hits">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Max Hits:</div>
+                                <div class="m-0">
+                                    {{ move.meta.max_hits }}
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Min Hits -->
+                        <li class="list-group-item" *ngIf="move.meta.min_hits">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Min Hits:</div>
+                                <div class="m-0">
+                                    {{ move.meta.min_hits }}
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Turns -->
+                        <li class="list-group-item" *ngIf="!move.meta.max_turns">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Turns:</div>
+                                <div class="m-0">
+                                    1
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Max Turns -->
+                        <li class="list-group-item" *ngIf="move.meta.max_turns">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Max Turns:</div>
+                                <div class="m-0">
+                                    {{ move.meta.max_turns }}
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Min Turns -->
+                        <li class="list-group-item" *ngIf="move.meta.min_turns">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Min Turns:</div>
+                                <div class="m-0">
+                                    {{ move.meta.min_turns }}
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Stat Chance -->
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Stat Change Chance:</div>
+                                <div class="m-0">
+                                    {{ move.meta.stat_chance }}
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- PP -->
+                        <!-- <li class="list-group-item">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">PP:</div>
+                                <div class="m-0">
+                                    {{ move.pp }}
+                                </div>
+                            </div>
+                        </li> -->
+
+                        <!-- Accuracy -->
+                        <!-- <li class="list-group-item">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Accuracy:</div>
+                                <div class="m-0">
+                                    {{ move.accuracy }}
+                                </div>
+                            </div>
+                        </li> -->
+
+                        <!-- Priority -->
+                        <!-- <li class="list-group-item">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Priority:</div>
+                                <div class="m-0">
+                                    {{ move.priority }}
+                                </div>
+                            </div>
+                        </li> -->
+
+                        <!-- Effect Chance -->
+                        <!-- <li class="list-group-item" *ngIf="move.effect_chance">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Effect Chance:</div>
+                                <div class="m-0">
+                                    {{ move.effect_chance }}
+                                </div>
+                            </div>
+                        </li> -->
+
+
+
+
+                        <!-- Category -->
+                        <!-- <li class="list-group-item">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Category:</div>
+                                <div class="m-0">
+                                    {{ item.category.name | titlecase }}
+                                </div>
+                            </div>
+                        </li> -->
+
+                        <!-- Price -->
+                        <!-- <li class="list-group-item">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Price:</div>
+                                <div class="m-0">
+                                    {{ item.cost }} <img
+                                        src="https://archives.bulbagarden.net/media/upload/8/8c/Pok%C3%A9monDollar.png"
+                                        alt="Pokédollar symbol">
+                                </div>
+                            </div>
+                        </li> -->
+
+                        <!-- Held by Pokemon -->
+                        <!-- <li class="list-group-item" *ngIf="item.held_by_pokemon[0]">
+                            <div class="d-flex justify-content-evenly">
+                                <div class="fw-bold">Held by:</div>
+                                <div>
+                                    <div class="m-0" *ngFor="let pokemon of item.held_by_pokemon; let i = index">
+                                        <a
+                                            href="/pokemon/{{ (pokemon.pokemon.url).slice(34, (pokemon.pokemon.url).length-1) }}">
+                                            {{ pokemon.pokemon.name | titlecase }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li> -->
+
+                    </ul>
+                </div>
+
+
+                <!-- LANGUAGES -->
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold mb-2">Name in different languages:</div>
+                                <table class="table">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th scope="col">Language</th>
+                                            <th scope="col">Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let thisName of move.names
+                                        ; let i = index">
+                                            <th scope="row" [ngSwitch]="thisName.language.name"
+                                                *ngIf="thisName.language.name != 'ja'">
+                                                <span *ngSwitchCase="'ja-Hrkt'">Japanese</span>
+                                                <span *ngSwitchCase="'ko'">Korean</span>
+                                                <span *ngSwitchCase="'zh-Hant'">Cantonese</span>
+                                                <span *ngSwitchCase="'fr'">French</span>
+                                                <span *ngSwitchCase="'de'">German</span>
+                                                <span *ngSwitchCase="'es'">Spanish</span>
+                                                <span *ngSwitchCase="'it'">Italian</span>
+                                                <span *ngSwitchCase="'en'">English</span>
+                                                <span *ngSwitchCase="'zh-Hans'">Mandarin</span>
+                                            </th>
+                                            <td *ngIf="thisName.language.name != 'ja'">{{ thisName.name }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <!-- MACHINES -->
+                <div class="col-12 mb-4" *ngIf="move.machines[0]">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold mb-2">Machines:</div>
+                                <table class="table">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th scope="col">Game</th>
+                                            <th scope="col">Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let machine of move.machines
+                                        ; let i = index">
+                                            <th scope="row">
+                                                <app-small-game [gameName]="machine.version_group.name"></app-small-game>
+                                            </th>
+                                            <td><app-small-machine [machineId]="(machine.machine.url).slice(34, machine.machine.url.length - 1)"></app-small-machine></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
