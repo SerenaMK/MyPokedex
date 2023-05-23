@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { MachineService } from 'src/app/services/machine.service';
 import { MoveService } from 'src/app/services/move.service';
 
 @Component({
@@ -26,12 +25,6 @@ export class MoveComponent implements OnInit {
         this.moveService.getMoveById(this.id).subscribe(data => {
             this.move = data
             this.replaceHyphens();
-
-            console.log("THIS MOVE OBJECT:");
-            console.log(this.move);
-            // console.log("-----------------------------------");
-            // console.log("MACHINES:");
-            // console.log(this.move.machines);
         })
 
 
@@ -46,14 +39,6 @@ export class MoveComponent implements OnInit {
         if (this.move.target.name.includes("-")) {
             this.move.target.name = this.move.target.name.replaceAll("-", " ")
         }
-
-        // if(this.move.learned_by_pokemon[0]) {
-        //     for (let i = 0; i < this.move.learned_by_pokemon.length; i++) {
-        //         if (this.move.learned_by_pokemon[i].name.includes("-")) {
-        //             this.move.learned_by_pokemon[i].name = this.move.learned_by_pokemon[i].name.replaceAll("-", " ")
-        //         }
-        //     }
-        // }
 
         if(this.move.effect_entries[0]) {
             for (let i = 0; i < this.move.effect_entries.length; i++) {
@@ -80,20 +65,5 @@ export class MoveComponent implements OnInit {
             window.location.reload();
         });
     }
-
-    // getMachineName(url: string) {
-    //     let machineId: number = parseInt(url.slice(34, url.length-1))
-    //     let machine: any
-
-    //     // this.machineService.getMachineById(1).subscribe(data => {
-    //     //     machine = data
-
-    //     //     console.log("MACHINE:");
-    //     //     console.log(machine);
-    //     // })
-
-    //     return machineId
-    //     return machine.item.name
-    // }
 
 }

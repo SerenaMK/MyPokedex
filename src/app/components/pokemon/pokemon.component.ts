@@ -12,6 +12,7 @@ export class PokemonComponent implements OnInit {
     id: number = parseInt(this.route.snapshot.paramMap.get("id")!);
     newId!: string;
     pokemon: any;
+    noVersion: boolean = true;
 
     constructor(private pokedexService: PokedexService, private route: ActivatedRoute, private router: Router) { }
 
@@ -27,9 +28,23 @@ export class PokemonComponent implements OnInit {
 
             console.log("THIS POKEMON OBJECT:");
             console.log(this.pokemon);
-            console.log("-----------------------------------");
+            // console.log("-----------------------------------");
             // console.log("pokemonRaw:");
             // console.log(this.pokemonRaw);
+
+            this.noVersion = (
+                !this.pokemon.sprites.versions['generation-i']['red-blue'].front_default &&
+                !this.pokemon.sprites.versions['generation-ii'].gold.front_default &&
+                !this.pokemon.sprites.versions['generation-iii']['ruby-sapphire'].front_default &&
+                !this.pokemon.sprites.versions['generation-iii']['firered-leafgreen'].front_default &&
+                !this.pokemon.sprites.versions['generation-iv']['diamond-pearl'].front_default &&
+                !this.pokemon.sprites.versions['generation-iv']['heartgold-soulsilver'].front_default &&
+                !this.pokemon.sprites.versions['generation-v']['black-white'].front_default &&
+                !this.pokemon.sprites.versions['generation-vi']['omegaruby-alphasapphire'].front_default &&
+                !this.pokemon.sprites.versions['generation-vii']['ultra-sun-ultra-moon'].front_default &&
+                !this.pokemon.sprites.versions['generation-viii'].icons.front_default
+                )
+
         })
 
 
@@ -63,14 +78,6 @@ export class PokemonComponent implements OnInit {
             }
         }
 
-        if(this.pokemon.held_items[0]) {
-            for (let i = 0; i < this.pokemon.held_items.length; i++) {
-                if (this.pokemon.held_items[i].item.name.includes("-")) {
-                    this.pokemon.held_items[i].item.name = this.pokemon.held_items[i].item.name.replaceAll("-", " ")
-                }
-            }
-        }
-
         if(this.pokemon.stats[0]) {
             for (let i = 0; i < this.pokemon.stats.length; i++) {
                 if (this.pokemon.stats[i].stat.name.includes("-")) {
@@ -79,10 +86,6 @@ export class PokemonComponent implements OnInit {
             }
         }
     }
-
-    // ngDoCheck() {
-    //     this.id = parseInt(this.route.snapshot.paramMap.get("id")!);
-    // }
 
     getPreviousPokemon() {
         this.router.navigateByUrl("/pokemon/" + (this.id - 1)).then(() => {

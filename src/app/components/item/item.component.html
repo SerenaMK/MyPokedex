@@ -23,99 +23,112 @@
     <div class="col-12 col-md-6">
         <div class="container">
             <div class="row">
+
                 <div class="col-12 mb-4">
                     <ul class="list-group">
+                        <li class="list-group-item p-0">
+                            <div class="d-flex flex-column">
 
-                        <!-- Sprite -->
-                        <li class="list-group-item">
-                            <div class="d-flex justify-content-around">
-                                <div class="fw-bold">Sprite:</div>
-                                <div class="m-0">
-                                    <img src="{{ item.sprites.default }}" alt="Item sprite">
-                                </div>
+                                <table class="table mb-0">
+                                    <tbody>
+
+                                        <!-- Sprite -->
+                                        <tr *ngIf="item.sprites.default">
+                                            <th scope="row">
+                                                Sprite:
+                                            </th>
+                                            <td>
+                                                <img src="{{ item.sprites.default }}" alt="Item sprite">
+                                            </td>
+                                        </tr>
+                                        <!-- Category -->
+                                        <tr>
+                                            <th scope="row">
+                                                Category:
+                                            </th>
+                                            <td>
+                                                {{ item.category.name | titlecase }}
+                                            </td>
+                                        </tr>
+                                        <!-- Effect -->
+                                        <tr>
+                                            <td colspan="2" class="px-3">
+                                                <div class="d-flex flex-column">
+                                                    <div class="fw-bold">Effect:</div>
+                                                    <div class="pb-3 pt-2">
+                                                        <div class="m-0"
+                                                            *ngFor="let effect of item.effect_entries; let i = index"
+                                                            style="white-space:pre-wrap">{{ effect.effect }}
+
+                                                            <p class="pt-4 mb-2 fw-bold">In short:</p>
+                                                            {{ effect.short_effect }}
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <!-- Price -->
+                                        <tr>
+                                            <th scope="row">
+                                                Price:
+                                            </th>
+                                            <td>
+                                                {{ item.cost }} <img src="https://i.ibb.co/nnBNB30/Pok-mon-Dollar.png"
+                                                    alt="Pokédollar symbol">
+                                            </td>
+                                        </tr>
+                                        <!-- Attributes -->
+                                        <tr>
+                                            <th scope="row">
+                                                Attributes:
+                                            </th>
+                                            <td>
+                                                <div class="m-0"
+                                                    *ngFor="let attribute of item.attributes; let i = index">
+                                                    {{ attribute.name | titlecase }}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <!-- Fling Power -->
+                                        <tr *ngIf="item.fling_power">
+                                            <th scope="row">
+                                                Fling Power:
+                                            </th>
+                                            <td>
+                                                {{ item.fling_power }}
+                                            </td>
+                                        </tr>
+                                        <!-- Fling Effect -->
+                                        <tr *ngIf="item.fling_effect">
+                                            <th scope="row">
+                                                Fling Effect:
+                                            </th>
+                                            <td>
+                                                {{ item.fling_effect.name | titlecase }}
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
                             </div>
                         </li>
-
-                        <!-- Category -->
-                        <li class="list-group-item">
-                            <div class="d-flex justify-content-around">
-                                <div class="fw-bold">Category:</div>
-                                <div class="m-0">
-                                    {{ item.category.name | titlecase }}
-                                </div>
-                            </div>
-                        </li>
-
-                        <!-- Price -->
-                        <li class="list-group-item">
-                            <div class="d-flex justify-content-around">
-                                <div class="fw-bold">Price:</div>
-                                <div class="m-0">
-                                    {{ item.cost }} <img
-                                        src="https://i.ibb.co/nnBNB30/Pok-mon-Dollar.png"
-                                        alt="Pokédollar symbol">
-                                </div>
-                            </div>
-                        </li>
-
                     </ul>
                 </div>
 
-                <!-- STATS -->
-                <!-- <div class="col-12 mb-4">
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <div class="d-flex flex-column">
-                                <div class="fw-bold mb-2">Stats:</div>
 
-                                <table class="table">
-                                    <thead>
-                                        <tr class="table-danger">
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Base Stat</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let pokeStat of pokemon.stats
-                                        ; let i = index">
-                                            <th scope="row">{{ pokeStat.stat.name | titlecase }}</th>
-                                            <td>{{ pokeStat.base_stat }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
 
-                            </div>
-                        </li>
-                    </ul>
-                </div> -->
-
-                <!-- MOVES -->
-                <!-- <div class="col-12 mb-4">
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <div class="d-flex flex-column">
-                                <div class="fw-bold">Moves:</div>
-                                <div class="py-3">
-                                    <div class="m-0" *ngFor="let pokemonMove of pokemon.moves; let i = index">
-                                        <a routerLink="/move/{{ (pokemonMove.move.url).slice(31, (pokemonMove.move.url).length-1) }}">
-                                            {{ pokemonMove.move.name | titlecase }}
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div> -->
-
+                <!-- HELD BY POKEMON -->
                 <div class="col-12 mb-4" *ngIf="item.held_by_pokemon[0]">
                     <ul class="list-group">
                         <li class="list-group-item">
                             <div class="d-flex flex-column">
                                 <div class="fw-bold">Held by:</div>
 
-                                <div class="py-3 collapse d-flex flex-wrap justify-content-center">
+                                <div class="py-3 d-flex flex-wrap justify-content-center">
                                     <div class="m-1" *ngFor="let pokemon of item.held_by_pokemon; let i = index">
-                                        <a routerLink="/pokemon/{{ (pokemon.pokemon.url).slice(34, (pokemon.pokemon.url).length-1) }}">
+                                        <a
+                                            routerLink="/pokemon/{{ (pokemon.pokemon.url).slice(34, (pokemon.pokemon.url).length-1) }}">
                                             <app-small-pokemon [pokemonName]="pokemon.pokemon.name"></app-small-pokemon>
                                         </a>
                                     </div>
@@ -126,14 +139,13 @@
                 </div>
 
 
-
-                <!-- GAME INDICES -->
+                <!-- DESCRIPTION -->
                 <div class="col-12 mb-4">
                     <ul class="list-group">
-                        <li class="list-group-item">
+                        <li class="list-group-item px-0 pb-0">
                             <div class="d-flex flex-column">
                                 <div class="fw-bold mb-2">Description:</div>
-                                <table class="table">
+                                <table class="table mb-0">
                                     <thead>
                                         <tr class="table-danger">
                                             <th scope="col">Game</th>
@@ -154,13 +166,26 @@
                     </ul>
                 </div>
 
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- COLUMN 2 -->
+    <div class="col-12 col-md-6">
+        <div class="container mb-4">
+            <div class="row">
+
+
                 <!-- GAME INDICES -->
                 <div class="col-12 mb-4">
                     <ul class="list-group">
-                        <li class="list-group-item">
+                        <li class="list-group-item px-0 pb-0">
                             <div class="d-flex flex-column">
                                 <div class="fw-bold mb-2">Game Indices:</div>
-                                <table class="table">
+                                <table class="table mb-0">
                                     <thead>
                                         <tr class="table-danger">
                                             <th scope="col">Game</th>
@@ -180,71 +205,14 @@
                     </ul>
                 </div>
 
-            </div>
-        </div>
-    </div>
-
-
-    <!-- COLUMN 2 -->
-    <div class="col-12 col-md-6">
-        <div class="container mb-4">
-            <div class="row">
-
-                <div class="col-12 mb-4">
-                    <ul class="list-group">
-
-                        <!-- Effect -->
-                        <li class="list-group-item" *ngIf="item.effect_entries[0]">
-                            <div class="d-flex flex-column">
-                                <div class="fw-bold">Effect:</div>
-                                <div class="py-3">
-                                    <div class="m-0" *ngFor="let effect of item.effect_entries; let i = index" style="white-space:pre-wrap">{{ effect.effect }}</div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <!-- ATTRIBUTES -->
-                        <li class="list-group-item">
-                            <div class="d-flex justify-content-around">
-                                <div class="fw-bold">Attributes:</div>
-                                <div>
-                                    <div class="m-0" *ngFor="let attribute of item.attributes; let i = index">
-                                        {{ attribute.name | titlecase }}
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <!-- FLING POWER -->
-                        <li class="list-group-item" *ngIf="item.fling_power">
-                            <div class="d-flex justify-content-around">
-                                <div class="fw-bold">Fling Power:</div>
-                                <div class="m-0">
-                                    {{ item.fling_power }}
-                                </div>
-                            </div>
-                        </li>
-
-                        <!-- FLING EFFECT -->
-                        <li class="list-group-item" *ngIf="item.fling_effect">
-                            <div class="d-flex justify-content-around">
-                                <div class="fw-bold">Fling Effect:</div>
-                                <div class="m-0">
-                                    {{ item.fling_effect | titlecase }}
-                                </div>
-                            </div>
-                        </li>
-
-                    </ul>
-                </div>
 
                 <!-- LANGUAGES -->
                 <div class="col-12 mb-4">
                     <ul class="list-group">
-                        <li class="list-group-item">
+                        <li class="list-group-item px-0 pb-0">
                             <div class="d-flex flex-column">
                                 <div class="fw-bold mb-2">Name in different languages:</div>
-                                <table class="table">
+                                <table class="table mb-0">
                                     <thead>
                                         <tr class="table-danger">
                                             <th scope="col">Language</th>

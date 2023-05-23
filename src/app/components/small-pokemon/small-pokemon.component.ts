@@ -20,7 +20,6 @@ export class SmallPokemonComponent implements OnInit {
             this.icon = this.pokemon.sprites.versions['generation-viii'].icons.front_default
             this.replaceHyphens()
 
-            console.log(this.pokemon.sprites.versions['generation-vii'].icons.front_default);
             // console.log(this.pokemon.sprites.versions['generation-viii'].icons.front_default);
 
         })

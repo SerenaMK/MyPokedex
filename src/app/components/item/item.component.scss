@@ -6,3 +6,7 @@ a {
         font-style: italic;
     }
 }
+
+table > tbody > tr:last-of-type {
+    border-bottom-color: transparent;
+}

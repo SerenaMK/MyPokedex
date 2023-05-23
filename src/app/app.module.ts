@@ -17,6 +17,8 @@ import { MoveListComponent } from './components/move-list/move-list.component';
 import { SmallMachineComponent } from './components/small-machine/small-machine.component';
 import { SmallGameComponent } from './components/small-game/small-game.component';
 import { SmallPokemonComponent } from './components/small-pokemon/small-pokemon.component';
+import { SmallTypeComponent } from './components/small-type/small-type.component';
+import { SmallItemComponent } from './components/small-item/small-item.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +34,9 @@ import { SmallPokemonComponent } from './components/small-pokemon/small-pokemon.
         MoveListComponent,
         SmallMachineComponent,
         SmallGameComponent,
-        SmallPokemonComponent
+        SmallPokemonComponent,
+        SmallTypeComponent,
+        SmallItemComponent
     ],
     imports: [
         BrowserModule,

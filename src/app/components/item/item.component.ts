@@ -27,9 +27,6 @@ export class ItemComponent implements OnInit {
 
             console.log("THIS ITEM OBJECT:");
             console.log(this.item);
-            // console.log("-----------------------------------");
-            // console.log("effect_entries:");
-            // console.log(this.item.effect_entries);
         })
 
 
@@ -46,12 +43,6 @@ export class ItemComponent implements OnInit {
                 this.item.category.name = this.item.category.name.replaceAll("-", " ")
             }
         }
-
-        // if(this.item.past_types[0]) {
-        //     if (this.pokemon.past_types[0].generation.name.includes("-")) {
-        //         this.pokemon.past_types[0].generation.name = this.pokemon.past_types[0].generation.name.replaceAll("-", " ")
-        //     }
-        // }
 
         if(this.item.game_indices[0]) {
             for (let i = 0; i < this.item.game_indices.length; i++) {

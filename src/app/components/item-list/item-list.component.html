@@ -7,10 +7,13 @@
             Number of Items: <b>{{ item.count }}</b>
         </p>
         <!-- SEARCH BAR -->
-        <form [formGroup]="itemSearch" class="d-flex mb-4 w-50 m-auto" role="search" (ngSubmit)="onSubmit()">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" data-bs-theme="light" formControlName="search">
-            <button class="btn btn-danger" type="submit">Search</button>
-        </form>
+        <div class="col-12 col-md-6 mx-auto">
+            <form [formGroup]="itemSearch" class="d-flex mb-4 w-100" role="search" (ngSubmit)="onSubmit()">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                    data-bs-theme="light" formControlName="search">
+                <button class="btn btn-danger" type="submit">Search</button>
+            </form>
+        </div>
 
     </div>
 </div>
@@ -36,12 +39,17 @@
             <a class="list-group-item list-group-item-action" *ngFor="let thisItem of item.results; let i = index"
                 routerLink="/item/{{ (thisItem.url).slice(31, (thisItem.url).length-1) }}">
 
-                <!-- Pokemon Number -->
-                <span class="badge bg-danger-subtle text-danger rounded-pill">
-                    # {{ (thisItem.url).slice(31, (thisItem.url).length-1) }}
-                </span>
-                <!-- Pokemon Name -->
-                <b> {{ thisItem.name | titlecase }}</b>
+                <!-- <div class="d-flex justify-content-center"> -->
+
+                    <!-- Pokemon Number -->
+                    <span class="badge bg-danger-subtle text-danger rounded-pill">
+                        # {{ (thisItem.url).slice(31, (thisItem.url).length-1) }}
+                    </span>
+                    <!-- Pokemon Name -->
+                    {{ thisItem.name | titlecase }}
+                    <!-- <app-small-item [itemName]="thisItem.name"></app-small-item> -->
+
+                <!-- </div> -->
 
             </a>
         </div>

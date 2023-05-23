@@ -1,0 +1,24 @@
+<div class="m-0 mb-1 px-2 type" [ngClass]="{
+    'normal' : typeName == 'normal',
+    'fighting' : typeName == 'fighting',
+    'flying' : typeName == 'flying',
+    'poison' : typeName == 'poison',
+    'ground' : typeName == 'ground',
+    'rock' : typeName == 'rock',
+    'bug' : typeName == 'bug',
+    'ghost' : typeName == 'ghost',
+    'steel' : typeName == 'steel',
+    'fire' : typeName == 'fire',
+    'water' : typeName == 'water',
+    'grass' : typeName == 'grass',
+    'electric' : typeName == 'electric',
+    'psychic' : typeName == 'psychic',
+    'ice' : typeName == 'ice',
+    'dragon' : typeName == 'dragon',
+    'dark' : typeName == 'dark',
+    'fairy' : typeName == 'fairy',
+    'unknown' : typeName == 'unknown',
+    'shadow' : typeName == 'shadow'
+}">
+    {{ typeName | titlecase }}
+</div>

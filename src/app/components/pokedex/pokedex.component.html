@@ -7,10 +7,14 @@
             Number of Pokemon: <b>{{ pokemon.count }}</b>
         </p>
         <!-- SEARCH BAR -->
-        <form [formGroup]="pokemonSearch" class="d-flex mb-4 w-50 m-auto" role="search" (ngSubmit)="onSubmit()">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" data-bs-theme="light" formControlName="search">
-            <button class="btn btn-danger" type="submit">Search</button>
-        </form>
+        <div class="col-12 col-md-6 mx-auto">
+            <form [formGroup]="pokemonSearch" class="d-flex mb-4 w-100" role="search"
+                (ngSubmit)="onSubmit()">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                    data-bs-theme="light" formControlName="search">
+                <button class="btn btn-danger" type="submit">Search</button>
+            </form>
+        </div>
 
     </div>
 </div>
@@ -41,7 +45,7 @@
                     # {{ (thisPokemon.url).slice(34, (thisPokemon.url).length-1) }}
                 </span>
                 <!-- Pokemon Name -->
-                <b> {{ thisPokemon.name | titlecase }}</b>
+                {{ thisPokemon.name | titlecase }}
 
             </a>
         </div>
