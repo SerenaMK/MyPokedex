@@ -73,10 +73,10 @@ export class MoveListComponent implements OnInit {
         let array = []
 
         for (let i = 0; i < this.move.results.length; i++) {
-            let pokeName: string = this.move.results[i].name
+            let moveName: string = this.move.results[i].name
 
-            if (pokeName.includes("-")) {
-                this.move.results[i].name = pokeName.replaceAll("-", " ")
+            if (moveName.includes("-")) {
+                this.move.results[i].name = moveName.replaceAll("-", " ")
                 array.push(this.move.results[i])
             } else {
                 array.push(this.move.results[i])

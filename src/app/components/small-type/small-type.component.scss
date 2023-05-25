@@ -1,7 +1,11 @@
+a {
+    text-decoration: none;
+    color: white;
+}
+
 .type {
     border: 1px rgba(128, 128, 128, 0.446) solid;
     border-radius: 15px;
-    color: white;
     width: 80px;
 }
 
@@ -65,4 +69,30 @@
 }
 .shadow {
     background-color: #68A090;
+}
+
+
+.normal,
+.fighting,
+.flying,
+.poison,
+.ground,
+.rock,
+.bug,
+.ghost,
+.steel,
+.fire,
+.water,
+.grass,
+.electric,
+.psychic,
+.ice,
+.dragon,
+.dark,
+.fairy,
+.unknown,
+.shadow {
+    &:hover {
+        background-color: lightgray;
+    }
 }

@@ -1,0 +1,197 @@
+<div class="row">
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" (click)="getPreviousAbility()" [ngClass]="{ 'disabled' : id == 1 }">
+                <a class="page-link" style="cursor: pointer">Previous</a>
+            </li>
+
+            <div class="col-9 col-lg-6 col-xl-4 mb-4">
+                <p class="m-0">#{{ ability.id }}</p>
+                <h1 class="text-danger fw-bold">{{ ability.name | titlecase }}</h1>
+            </div>
+
+            <li class="page-item" (click)="getNextAbility()" [ngClass]="{ 'disabled' : id == 10060 }">
+                <a class="page-link" style="cursor: pointer">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="row">
+    <!-- COLUMN 1 -->
+    <div class="col-12 col-md-6">
+        <div class="container">
+            <div class="row">
+
+
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item p-0">
+                            <div class="d-flex flex-column">
+                                <table class="table mb-0">
+                                    <tbody>
+                                        <!-- ID -->
+                                        <tr>
+                                            <th scope="row">
+                                                ID:
+                                            </th>
+                                            <td>
+                                                {{ ability.id }}
+                                            </td>
+                                        </tr>
+                                        <!-- IS FROM THE MAIN GAMES SERIES -->
+                                        <tr>
+                                            <th scope="row">
+                                                From main game:
+                                            </th>
+                                            <td>
+                                                <span *ngIf="ability.is_main_series">Yes</span>
+                                                <span *ngIf="!ability.is_main_series">No</span>
+                                            </td>
+                                        </tr>
+                                        <!-- GENERATION -->
+                                        <tr>
+                                            <th scope="row">
+                                                First appeared in:
+                                            </th>
+                                            <td>
+                                                {{ ability.generation.name | uppercase }}
+                                            </td>
+                                        </tr>
+                                        <!-- Effect -->
+                                        <tr *ngIf="ability.effect_entries[0]">
+                                            <td colspan="2" class="px-3">
+                                                <div class="d-flex flex-column">
+                                                    <div class="fw-bold">Effect:</div>
+                                                    <div class="pb-3 pt-2">
+                                                        <div class="m-0"
+                                                            *ngFor="let effect of ability.effect_entries; let i = index"
+                                                            style="white-space:pre-wrap">
+                                                            <div *ngIf="effect.language.name=='en'">
+                                                                {{ effect.effect }}
+                                                                <p class="pt-4 mb-2 fw-bold">In short:</p>
+                                                                {{ effect.short_effect }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <!-- DESCRIPTION -->
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item px-0 pb-0">
+                            <div class="d-flex flex-column table-responsive">
+                                <div class="fw-bold mb-2">Description</div>
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th scope="col">Game</th>
+                                            <th scope="col">Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let gameDesc of ability.flavor_text_entries
+                                        ; let i = index">
+                                            <th scope="row" *ngIf="gameDesc.language.name == 'en'">
+                                                <app-small-game [gameName]="gameDesc.version_group.name">
+                                                </app-small-game>
+                                            </th>
+                                            <td *ngIf="gameDesc.language.name == 'en'">{{ gameDesc.flavor_text }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- COLUMN 2 -->
+    <div class="col-12 col-md-6">
+        <div class="container mb-4">
+            <div class="row">
+
+                <!-- POKEMON -->
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold">Might have this ability</div>
+
+                                <div class="py-3 d-flex flex-wrap justify-content-center">
+                                    <div class="m-1" *ngFor="let pokemon of ability.pokemon; let i = index">
+                                        <a routerLink="/pokemon/{{ (pokemon.pokemon.url).slice(34, (pokemon.pokemon.url).length-1) }}">
+                                            <app-small-pokemon [pokemonName]="pokemon.pokemon.name">
+                                            </app-small-pokemon>
+                                        </a>
+                                        <div class="bg-body-tertiary" style="font-size: 0.8em;">
+                                            <div>Slot {{ pokemon.slot }}</div>
+                                            <div *ngIf="pokemon.is_hidden" class="fst-italic">Hidden</div>
+                                            <div *ngIf="!pokemon.is_hidden">&nbsp;</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <!-- LANGUAGES -->
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item px-0 pb-0">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold mb-2">Name in different languages</div>
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th scope="col">Language</th>
+                                            <th scope="col">Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let thisName of ability.names
+                                        ; let i = index">
+                                            <th scope="row" [ngSwitch]="thisName.language.name"
+                                                *ngIf="thisName.language.name != 'ja'">
+                                                <span *ngSwitchCase="'ja-Hrkt'">Japanese</span>
+                                                <span *ngSwitchCase="'ko'">Korean</span>
+                                                <span *ngSwitchCase="'zh-Hant'">Cantonese</span>
+                                                <span *ngSwitchCase="'fr'">French</span>
+                                                <span *ngSwitchCase="'de'">German</span>
+                                                <span *ngSwitchCase="'es'">Spanish</span>
+                                                <span *ngSwitchCase="'it'">Italian</span>
+                                                <span *ngSwitchCase="'en'">English</span>
+                                                <span *ngSwitchCase="'zh-Hans'">Mandarin</span>
+                                            </th>
+                                            <td *ngIf="thisName.language.name != 'ja'">{{ thisName.name }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

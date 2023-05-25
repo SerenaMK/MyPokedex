@@ -1,8 +1,8 @@
 <div class="row">
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
-            <li class="page-item" (click)="getPreviousItem()">
-                <a class="page-link text-danger" style="cursor: pointer">Previous</a>
+            <li class="page-item" (click)="getPreviousItem()" [ngClass]="{ 'disabled' : id == 1 }">
+                <a class="page-link" style="cursor: pointer">Previous</a>
             </li>
 
             <div class="col-9 col-lg-6 col-xl-4 mb-4">
@@ -10,8 +10,8 @@
                 <h1 class="text-danger fw-bold">{{ item.name | titlecase }}</h1>
             </div>
 
-            <li class="page-item" (click)="getNextItem()">
-                <a class="page-link text-danger" style="cursor: pointer">Next</a>
+            <li class="page-item" (click)="getNextItem()" [ngClass]="{ 'disabled' : id == 10002 }">
+                <a class="page-link" style="cursor: pointer">Next</a>
             </li>
         </ul>
     </nav>
@@ -32,6 +32,15 @@
                                 <table class="table mb-0">
                                     <tbody>
 
+                                        <!-- ID -->
+                                        <tr>
+                                            <th scope="row">
+                                                ID:
+                                            </th>
+                                            <td>
+                                                {{ item.id }}
+                                            </td>
+                                        </tr>
                                         <!-- Sprite -->
                                         <tr *ngIf="item.sprites.default">
                                             <th scope="row">

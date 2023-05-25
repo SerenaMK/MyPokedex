@@ -88,15 +88,19 @@ export class PokemonComponent implements OnInit {
     }
 
     getPreviousPokemon() {
-        this.router.navigateByUrl("/pokemon/" + (this.id - 1)).then(() => {
-            window.location.reload();
-        });
+        if (this.id != 1) {
+            this.router.navigateByUrl("/pokemon/" + (this.id - 1)).then(() => {
+                window.location.reload();
+            });
+        }
     }
 
     getNextPokemon() {
-        this.router.navigateByUrl("/pokemon/" + (this.id + 1)).then(() => {
-            window.location.reload();
-        });
+        if (this.id != 10271) {
+            this.router.navigateByUrl("/pokemon/" + (this.id + 1)).then(() => {
+                window.location.reload();
+            });
+        }
     }
 
 }

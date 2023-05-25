@@ -19,15 +19,37 @@
     </div>
 </div>
 
+<!-- <b>{{ thisPageOffset }}</b><br><br> -->
+
 <!-- PAGINATION -->
 <div class="row">
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
-            <li class="page-item" (click)="getPreviousPage()">
-                <a class="page-link text-danger" style="cursor: pointer">Previous</a>
+            <!-- Previous Page -->
+            <li class="page-item" (click)="getPreviousPage()" [ngClass]="{ 'disabled' : thisPageOffset == 0 }">
+                <a class="page-link" style="cursor: pointer">Previous</a>
             </li>
-            <li class="page-item" (click)="getNextPage()">
-                <a class="page-link text-danger" style="cursor: pointer">Next</a>
+            <!-- <li class="page-item" (click)="getPageA()">
+                <a class="page-link" style="cursor: pointer">&laquo;</a>
+            </li> -->
+            <!-- Page A -->
+            <li class="page-item" (click)="getPageA()" [ngClass]="{ 'active' : thisPageOffset == 0 }">
+                <a class="page-link" style="cursor: pointer">{{ pagination[0].number }}</a>
+            </li>
+            <!-- Page B -->
+            <li class="page-item" (click)="getPageB()" [ngClass]="{ 'active' : thisPageOffset == getOffset(pagination[1].link) }">
+                <a class="page-link" style="cursor: pointer">{{ pagination[1].number }}</a>
+            </li>
+            <!-- Page C -->
+            <li class="page-item" (click)="getPageC()" [ngClass]="{ 'active' : thisPageOffset == lastOffset }">
+                <a class="page-link" style="cursor: pointer">{{ pagination[2].number }}</a>
+            </li>
+            <!-- <li class="page-item" (click)="getPageA()">
+                <a class="page-link" style="cursor: pointer">&raquo;</a>
+            </li> -->
+            <!-- Next Page -->
+            <li class="page-item" (click)="getNextPage()" [ngClass]="{ 'disabled' : thisPageOffset == lastOffset }">
+                <a class="page-link" style="cursor: pointer">Next</a>
             </li>
         </ul>
     </nav>
@@ -57,13 +79,10 @@
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
             <li class="page-item" (click)="getPreviousPage()">
-                <a class="page-link text-danger" style="cursor: pointer">Previous</a>
+                <a class="page-link" style="cursor: pointer">Previous</a>
             </li>
-            <!-- <li class="page-item"><a class="page-link" routerLink="/">1</a></li>
-            <li class="page-item"><a class="page-link" routerLink="/">2</a></li>
-            <li class="page-item"><a class="page-link" routerLink="/">3</a></li> -->
             <li class="page-item" (click)="getNextPage()">
-                <a class="page-link text-danger" style="cursor: pointer">Next</a>
+                <a class="page-link" style="cursor: pointer">Next</a>
             </li>
         </ul>
     </nav>

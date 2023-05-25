@@ -1,0 +1,201 @@
+<div class="row">
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" (click)="getPreviousNature()" [ngClass]="{ 'disabled' : id == 1 }">
+                <a class="page-link" style="cursor: pointer">Previous</a>
+            </li>
+
+            <div class="col-9 col-lg-6 col-xl-4 mb-4">
+                <p class="m-0">#{{ nature.id }}</p>
+                <h1 class="text-danger fw-bold">{{ nature.name | titlecase }}</h1>
+            </div>
+
+            <li class="page-item" (click)="getNextNature()" [ngClass]="{ 'disabled' : id == 25 }">
+                <a class="page-link" style="cursor: pointer">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="row">
+    <!-- COLUMN 1 -->
+    <div class="col-12 col-md-6">
+        <div class="container">
+            <div class="row">
+
+
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item p-0">
+                            <div class="d-flex flex-column">
+                                <table class="table mb-0">
+                                    <tbody>
+                                        <!-- ID -->
+                                        <tr>
+                                            <th scope="row">
+                                                ID:
+                                            </th>
+                                            <td>
+                                                {{ nature.id }}
+                                            </td>
+                                        </tr>
+                                        <!-- LIKES -->
+                                        <tr *ngIf="nature.likes_flavor">
+                                            <th scope="row">
+                                                Likes flavor:
+                                            </th>
+                                            <td>
+                                                {{ nature.likes_flavor.name | capitalcase }}
+                                            </td>
+                                        </tr>
+                                        <!-- HATES -->
+                                        <tr *ngIf="nature.hates_flavor">
+                                            <th scope="row">
+                                                Hates flavor:
+                                            </th>
+                                            <td>
+                                                {{ nature.hates_flavor.name | capitalcase }}
+                                            </td>
+                                        </tr>
+                                        <!-- LIKES -->
+                                        <tr *ngIf="nature.increased_stat">
+                                            <th scope="row">
+                                                Increased stat:
+                                            </th>
+                                            <td>
+                                                {{ nature.increased_stat.name | capitalcase }}
+                                            </td>
+                                        </tr>
+                                        <!-- HATES -->
+                                        <tr *ngIf="nature.decreased_stat">
+                                            <th scope="row">
+                                                Decreased stat:
+                                            </th>
+                                            <td>
+                                                {{ nature.decreased_stat.name | capitalcase }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <!-- Battle styles -->
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item px-0 pb-0">
+                            <div class="d-flex flex-column table-responsive">
+                                <div class="fw-bold mb-2">Move battle styles</div>
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th scope="col">Style</th>
+                                            <th scope="col">High HP chance</th>
+                                            <th scope="col">Low HP chance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let style of nature.move_battle_style_preferences
+                                        ; let i = index">
+                                            <th scope="row">
+                                                {{ style.move_battle_style.name | capitalcase }}
+                                            </th>
+                                            <td>
+                                                {{ style.high_hp_preference }}
+                                            </td>
+                                            <td>
+                                                {{ style.low_hp_preference }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pokeathlon stats -->
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item px-0 pb-0">
+                            <div class="d-flex flex-column table-responsive">
+                                <div class="fw-bold mb-2">Pokéathlon stats</div>
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th scope="col">Stat</th>
+                                            <th scope="col">Change</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let stat of nature.pokeathlon_stat_changes; let i = index">
+                                            <th scope="row">
+                                                {{ stat.pokeathlon_stat.name | capitalcase }}
+                                            </th>
+                                            <td>
+                                                {{ stat.max_change }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- COLUMN 2 -->
+    <div class="col-12 col-md-6">
+        <div class="container mb-4">
+            <div class="row">
+
+                <!-- LANGUAGES -->
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item px-0 pb-0">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold mb-2">Name in different languages</div>
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th scope="col">Language</th>
+                                            <th scope="col">Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let thisName of nature.names
+                                        ; let i = index">
+                                            <th scope="row" [ngSwitch]="thisName.language.name"
+                                                *ngIf="thisName.language.name != 'ja'">
+                                                <span *ngSwitchCase="'ja-Hrkt'">Japanese</span>
+                                                <span *ngSwitchCase="'ko'">Korean</span>
+                                                <span *ngSwitchCase="'zh-Hant'">Cantonese</span>
+                                                <span *ngSwitchCase="'fr'">French</span>
+                                                <span *ngSwitchCase="'de'">German</span>
+                                                <span *ngSwitchCase="'es'">Spanish</span>
+                                                <span *ngSwitchCase="'it'">Italian</span>
+                                                <span *ngSwitchCase="'en'">English</span>
+                                                <span *ngSwitchCase="'zh-Hans'">Mandarin</span>
+                                            </th>
+                                            <td *ngIf="thisName.language.name != 'ja'">{{ thisName.name }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

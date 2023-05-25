@@ -1,14 +1,14 @@
 <div class="row">
     <div class="col-12">
         <!-- TITLE -->
-        <h1 class="text-danger fw-bold">Items</h1>
-        <!-- NUMBER OF ITEMS -->
+        <h1 class="text-danger fw-bold">Abilities</h1>
+        <!-- NUMBER OF ABILITIES -->
         <p class="pt-2 fs-5">
-            Number of Items: <b>{{ item.count }}</b>
+            Number of Abilities: <b>{{ ability.count }}</b>
         </p>
         <!-- SEARCH BAR -->
         <div class="col-12 col-md-6 mx-auto">
-            <form [formGroup]="itemSearch" class="d-flex mb-4 w-100" role="search" (ngSubmit)="onSubmit()">
+            <form [formGroup]="abilitySearch" class="d-flex mb-4 w-100" role="search" (ngSubmit)="onSubmit()">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
                     data-bs-theme="light" formControlName="search">
                 <button class="btn btn-danger" type="submit">Search</button>
@@ -34,22 +34,17 @@
 
 <div class="row">
     <div class="col-md-4 offset-md-4">
-        <!-- LIST OF ITEMS -->
+        <!-- LIST OF ABILITIES -->
         <div class="list-group">
-            <a class="list-group-item list-group-item-action" *ngFor="let thisItem of item.results; let i = index"
-                routerLink="/item/{{ (thisItem.url).slice(31, (thisItem.url).length-1) }}">
+            <a class="list-group-item list-group-item-action" *ngFor="let thisAbilities of ability.results; let i = index"
+                routerLink="/ability/{{ (thisAbilities.url).slice(34, (thisAbilities.url).length-1) }}">
 
-                <!-- <div class="d-flex justify-content-center"> -->
-
-                    <!-- Number -->
-                    <span class="badge bg-danger-subtle text-danger rounded-pill">
-                        # {{ (thisItem.url).slice(31, (thisItem.url).length-1) }}
-                    </span>
-                    <!-- Name -->
-                    {{ thisItem.name | titlecase }}
-                    <!-- <app-small-item [itemName]="thisItem.name"></app-small-item> -->
-
-                <!-- </div> -->
+                <!-- Pokemon Number -->
+                <span class="badge bg-danger-subtle text-danger rounded-pill">
+                    # {{ (thisAbilities.url).slice(34, (thisAbilities.url).length-1) }}
+                </span>
+                <!-- Pokemon Name -->
+                {{ thisAbilities.name | titlecase }}
 
             </a>
         </div>

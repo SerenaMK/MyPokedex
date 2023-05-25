@@ -1,24 +1,27 @@
-<div class="m-0 mb-1 px-2 type" [ngClass]="{
-    'normal' : typeName == 'normal',
-    'fighting' : typeName == 'fighting',
-    'flying' : typeName == 'flying',
-    'poison' : typeName == 'poison',
-    'ground' : typeName == 'ground',
-    'rock' : typeName == 'rock',
-    'bug' : typeName == 'bug',
-    'ghost' : typeName == 'ghost',
-    'steel' : typeName == 'steel',
-    'fire' : typeName == 'fire',
-    'water' : typeName == 'water',
-    'grass' : typeName == 'grass',
-    'electric' : typeName == 'electric',
-    'psychic' : typeName == 'psychic',
-    'ice' : typeName == 'ice',
-    'dragon' : typeName == 'dragon',
-    'dark' : typeName == 'dark',
-    'fairy' : typeName == 'fairy',
-    'unknown' : typeName == 'unknown',
-    'shadow' : typeName == 'shadow'
+<a href="/type/{{ (type.url).slice(31, type.url.length - 1)}}">
+    <div class="m-0 mb-1 px-2 type" [ngClass]="{
+    'normal' : type.name == 'normal',
+    'fighting' : type.name == 'fighting',
+    'flying' : type.name == 'flying',
+    'poison' : type.name == 'poison',
+    'ground' : type.name == 'ground',
+    'rock' : type.name == 'rock',
+    'bug' : type.name == 'bug',
+    'ghost' : type.name == 'ghost',
+    'steel' : type.name == 'steel',
+    'fire' : type.name == 'fire',
+    'water' : type.name == 'water',
+    'grass' : type.name == 'grass',
+    'electric' : type.name == 'electric',
+    'psychic' : type.name == 'psychic',
+    'ice' : type.name == 'ice',
+    'dragon' : type.name == 'dragon',
+    'dark' : type.name == 'dark',
+    'fairy' : type.name == 'fairy',
+    'unknown' : type.name == 'unknown',
+    'shadow' : type.name == 'shadow'
 }">
-    {{ typeName | titlecase }}
-</div>
+        <span *ngIf="type.name != 'unknown'">{{ type.name | titlecase }}</span>
+        <span *ngIf="type.name == 'unknown'">???</span>
+    </div>
+</a>

@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SmallTypeComponent implements OnInit {
 
-    @Input() typeName!: string
+    @Input() type!: any
 
     constructor() { }
 

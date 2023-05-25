@@ -20,6 +20,13 @@ import { SmallPokemonComponent } from './components/small-pokemon/small-pokemon.
 import { SmallTypeComponent } from './components/small-type/small-type.component';
 import { SmallItemComponent } from './components/small-item/small-item.component';
 import { CapitalcasePipe } from './pipes/capitalcase.pipe';
+import { AbilityComponent } from './components/ability/ability.component';
+import { AbilityListComponent } from './components/ability-list/ability-list.component';
+import { TypeListComponent } from './components/type-list/type-list.component';
+import { TypeComponent } from './components/type/type.component';
+import { NatureListComponent } from './components/nature-list/nature-list.component';
+import { NatureComponent } from './components/nature/nature.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
     declarations: [
@@ -38,7 +45,14 @@ import { CapitalcasePipe } from './pipes/capitalcase.pipe';
         SmallPokemonComponent,
         SmallTypeComponent,
         SmallItemComponent,
-        CapitalcasePipe
+        CapitalcasePipe,
+        AbilityComponent,
+        AbilityListComponent,
+        TypeListComponent,
+        TypeComponent,
+        NatureListComponent,
+        NatureComponent,
+        PaginationComponent
     ],
     imports: [
         BrowserModule,

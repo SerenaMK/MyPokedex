@@ -1,8 +1,8 @@
 <div class="row">
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
-            <li class="page-item" (click)="getPreviousPokemon()">
-                <a class="page-link text-danger" style="cursor: pointer">Previous</a>
+            <li class="page-item" (click)="getPreviousPokemon()" [ngClass]="{ 'disabled' : id == 1 }">
+                <a class="page-link" style="cursor: pointer">Previous</a>
             </li>
 
             <div class="col-9 col-lg-6 col-xl-4 mb-4">
@@ -10,8 +10,8 @@
                 <h1 class="text-danger fw-bold">{{ pokemon.name | titlecase }}</h1>
             </div>
 
-            <li class="page-item" (click)="getNextPokemon()">
-                <a class="page-link text-danger" style="cursor: pointer">Next</a>
+            <li class="page-item" (click)="getNextPokemon()" [ngClass]="{ 'disabled' : id == 10271 }">
+                <a class="page-link" style="cursor: pointer">Next</a>
             </li>
         </ul>
     </nav>
@@ -34,6 +34,16 @@
                                 <table class="table mb-0">
                                     <tbody>
 
+                                        <!-- ID -->
+                                        <tr>
+                                            <th scope="row">
+                                                ID:
+                                            </th>
+                                            <td>
+                                                {{ pokemon.id }}
+                                            </td>
+                                        </tr>
+                                        <!-- Type -->
                                         <tr>
                                             <th scope="row">
                                                 Type:
@@ -42,12 +52,13 @@
                                                 <div class="m-0 mb-1 px-2 type"
                                                     *ngFor="let pokeType of pokemon.types; let i = index">
                                                     <div class="d-flex justify-content-center">
-                                                        <app-small-type [typeName]="pokeType.type.name">
+                                                        <app-small-type [type]="pokeType.type">
                                                         </app-small-type>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
+                                        <!-- Past types -->
                                         <tr *ngIf="pokemon.past_types[0]">
                                             <th scope="row">
                                                 Past Types:
@@ -59,13 +70,12 @@
                                                 <div class="m-0 mb-1 px-2 type"
                                                     *ngFor="let pokeType of pokemon.past_types[0].types; let i = index">
                                                     <div class="d-flex justify-content-center">
-                                                        <app-small-type [typeName]="pokeType.type.name">
+                                                        <app-small-type [type]="pokeType.type">
                                                         </app-small-type>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
-
                                         <!-- Height -->
                                         <tr>
                                             <th scope="row">
@@ -92,7 +102,10 @@
                                             <td>
                                                 <div class="m-0"
                                                     *ngFor="let pokemonAbility of pokemon.abilities; let i = index">
-                                                    {{ pokemonAbility.ability.name | titlecase }}
+                                                    <a
+                                                        routerLink="/ability/{{ (pokemonAbility.ability.url).slice(34, (pokemonAbility.ability.url).length-1) }}">
+                                                        {{ pokemonAbility.ability.name | titlecase }}
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -114,11 +127,12 @@
                                                 <div class="m-0"
                                                     *ngFor="let heldItem of pokemon.held_items; let i = index">
                                                     <div class="d-flex justify-content-center">
-                                                    <a
-                                                        href="/item/{{ (heldItem.item.url).slice(31, (heldItem.item.url).length-1) }}">
-                                                        <app-small-item [itemName]="heldItem.item.name">
-                                                        </app-small-item>
-                                                    </a></div>
+                                                        <a
+                                                            href="/item/{{ (heldItem.item.url).slice(31, (heldItem.item.url).length-1) }}">
+                                                            <app-small-item [itemName]="heldItem.item.name">
+                                                            </app-small-item>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </td>
                                         </tr>

@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-12">
+        <!-- TITLE -->
+        <h1 class="text-danger fw-bold">Types</h1>
+        <!-- NUMBER OF TYPES -->
+        <p class="pt-2 fs-5">
+            Number of Types: <b>{{ types.count }}</b>
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <!-- LIST OF TYPES -->
+        <div class="d-flex flex-wrap justify-content-center">
+            <div class="m-1" *ngFor="let type of types.results; let i = index">
+                <app-small-type [type]="type"></app-small-type>
+            </div>
+        </div>
+    </div>
+</div>

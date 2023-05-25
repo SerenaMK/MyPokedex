@@ -23,10 +23,10 @@
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
             <li class="page-item" (click)="getPreviousPage()">
-                <a class="page-link text-danger" style="cursor: pointer">Previous</a>
+                <a class="page-link" style="cursor: pointer">Previous</a>
             </li>
             <li class="page-item" (click)="getNextPage()">
-                <a class="page-link text-danger" style="cursor: pointer">Next</a>
+                <a class="page-link" style="cursor: pointer">Next</a>
             </li>
         </ul>
     </nav>
@@ -39,11 +39,11 @@
             <a class="list-group-item list-group-item-action" *ngFor="let thisMove of move.results; let i = index"
                 routerLink="/move/{{ (thisMove.url).slice(31, (thisMove.url).length-1) }}">
 
-                <!-- Pokemon Number -->
+                <!-- Number -->
                 <span class="badge bg-danger-subtle text-danger rounded-pill">
                     # {{ (thisMove.url).slice(31, (thisMove.url).length-1) }}
                 </span>
-                <!-- Pokemon Name -->
+                <!-- Name -->
                 {{ thisMove.name | titlecase }}
 
             </a>
@@ -56,10 +56,10 @@
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
             <li class="page-item" (click)="getPreviousPage()">
-                <a class="page-link text-danger" style="cursor: pointer">Previous</a>
+                <a class="page-link" style="cursor: pointer">Previous</a>
             </li>
             <li class="page-item" (click)="getNextPage()">
-                <a class="page-link text-danger" style="cursor: pointer">Next</a>
+                <a class="page-link" style="cursor: pointer">Next</a>
             </li>
         </ul>
     </nav>

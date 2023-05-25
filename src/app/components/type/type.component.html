@@ -1,0 +1,315 @@
+<div class="row">
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" (click)="getPreviousAbility()" [ngClass]="{ 'disabled' : id == 1 }">
+                <a class="page-link" style="cursor: pointer">Previous</a>
+            </li>
+
+            <div class="col-9 col-lg-6 col-xl-4 mb-4">
+                <p class="m-0">#{{ type.id }}</p>
+                <h1 class="text-danger fw-bold" *ngIf="type.name != 'unknown'">{{ type.name | titlecase }}</h1>
+                <h1 class="text-danger fw-bold" *ngIf="type.name == 'unknown'">???</h1>
+            </div>
+
+            <li class="page-item" (click)="getNextAbility()" [ngClass]="{ 'disabled' : id == 10002 }">
+                <a class="page-link" style="cursor: pointer">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="row">
+
+    <!-- COLUMN 1 -->
+    <div class="col-12 col-md-6">
+        <div class="container">
+            <div class="row">
+
+
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item p-0">
+                            <div class="d-flex flex-column">
+                                <table class="table mb-0">
+                                    <tbody>
+
+                                        <!-- ID -->
+                                        <tr>
+                                            <th scope="row">
+                                                ID:
+                                            </th>
+                                            <td>
+                                                {{ type.id }}
+                                            </td>
+                                        </tr>
+                                        <!-- Introduced in generation -->
+                                        <tr>
+                                            <th scope="row">
+                                                Introduced in:
+                                            </th>
+                                            <td>
+                                                {{ type.generation.name | uppercase }}
+                                            </td>
+                                        </tr>
+                                        <!-- Damage Class -->
+                                        <tr *ngIf="type.move_damage_class">
+                                            <th scope="row">
+                                                Move damage class:
+                                            </th>
+                                            <td>
+                                                <span *ngIf="type.move_damage_class.name == 'physical'">
+                                                    <img src="https://i.ibb.co/0cWBgPW/Physical-IC-HGSS.png"
+                                                        alt="Physical">
+                                                    {{ type.move_damage_class.name | titlecase }}
+                                                </span>
+                                                <span *ngIf="type.move_damage_class.name == 'special'">
+                                                    <img src="https://i.ibb.co/TwWhvP5/Special-IC-HGSS.png"
+                                                        alt="Special">
+                                                    {{ type.move_damage_class.name | titlecase }}
+                                                </span>
+                                                <span *ngIf="type.move_damage_class.name == 'status'">
+                                                    <img src="https://i.ibb.co/qdQ6PPS/Status-IC-HGSS.png" alt="Status">
+                                                    {{ type.move_damage_class.name | titlecase }}
+                                                </span>
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- DAMAGE RELATIONS -->
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item px-0 pb-0">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold mb-2">Damage relations</div>
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th scope="col">Damage</th>
+                                            <th scope="col">Type</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">
+                                                Double from:
+                                            </th>
+                                            <td>
+                                                <div class="d-flex flex-column align-items-center"
+                                                    *ngIf="type.damage_relations.double_damage_from[0]">
+                                                    <app-small-type [type]="type"
+                                                        *ngFor="let type of type.damage_relations.double_damage_from; let i = index">
+                                                    </app-small-type>
+                                                </div>
+                                                <div *ngIf="!type.damage_relations.double_damage_from[0]">---</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                Double to:
+                                            </th>
+                                            <td>
+                                                <div class="d-flex flex-column align-items-center"
+                                                    *ngIf="type.damage_relations.double_damage_to[0]">
+                                                    <app-small-type [type]="type"
+                                                        *ngFor="let type of type.damage_relations.double_damage_to; let i = index">
+                                                    </app-small-type>
+                                                </div>
+                                                <div *ngIf="!type.damage_relations.double_damage_to[0]">---</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                Half from:
+                                            </th>
+                                            <td>
+                                                <div class="d-flex flex-column align-items-center"
+                                                    *ngIf="type.damage_relations.half_damage_from[0]">
+                                                    <app-small-type [type]="type"
+                                                        *ngFor="let type of type.damage_relations.half_damage_from; let i = index">
+                                                    </app-small-type>
+                                                </div>
+                                                <div *ngIf="!type.damage_relations.half_damage_from[0]">---</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                Half to:
+                                            </th>
+                                            <td>
+                                                <div class="d-flex flex-column align-items-center"
+                                                    *ngIf="type.damage_relations.half_damage_to[0]">
+                                                    <app-small-type [type]="type"
+                                                        *ngFor="let type of type.damage_relations.half_damage_to; let i = index">
+                                                    </app-small-type>
+                                                </div>
+                                                <div *ngIf="!type.damage_relations.half_damage_to[0]">---</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                None from:
+                                            </th>
+                                            <td>
+                                                <div class="d-flex flex-column align-items-center"
+                                                    *ngIf="type.damage_relations.no_damage_from[0]">
+                                                    <app-small-type [type]="type"
+                                                        *ngFor="let type of type.damage_relations.no_damage_from; let i = index">
+                                                    </app-small-type>
+                                                </div>
+                                                <div *ngIf="!type.damage_relations.no_damage_from[0]">---</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                None to:
+                                            </th>
+                                            <td>
+                                                <div class="d-flex flex-column align-items-center"
+                                                    *ngIf="type.damage_relations.no_damage_to[0]">
+                                                    <app-small-type [type]="type"
+                                                        *ngFor="let type of type.damage_relations.no_damage_to; let i = index">
+                                                    </app-small-type>
+                                                </div>
+                                                <div *ngIf="!type.damage_relations.no_damage_to[0]">---</div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- MOVES -->
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold">Moves of this type</div>
+
+                                <div class="py-3 d-flex flex-wrap justify-content-center">
+                                    <div class="m-1" *ngFor="let pokemonMove of type.moves; let i = index">
+                                        <a
+                                            routerLink="/move/{{ (pokemonMove.url).slice(31, (pokemonMove.url).length-1) }}">
+                                            <div class="bg-body-tertiary p-1">
+                                                {{ pokemonMove.name | titlecase }}
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- COLUMN 2 -->
+    <div class="col-12 col-md-6">
+        <div class="container mb-4">
+            <div class="row">
+
+
+                <!-- POKEMON -->
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold">Pokemon that have this type</div>
+
+                                <div class="py-3 d-flex flex-wrap justify-content-center">
+                                    <div class="m-1" *ngFor="let pokemon of type.pokemon; let i = index">
+                                        <a
+                                            routerLink="/pokemon/{{ (pokemon.pokemon.url).slice(34, (pokemon.pokemon.url).length-1) }}">
+                                            <app-small-pokemon [pokemonName]="pokemon.pokemon.name">
+                                            </app-small-pokemon>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <!-- GAME INDICES -->
+                <div class="col-12 mb-4" *ngIf="type.game_indices[0]">
+                    <ul class="list-group">
+                        <li class="list-group-item px-0 pb-0">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold mb-2">Game indices</div>
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th scope="col">Game</th>
+                                            <th scope="col">Index</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let gameIndex of type.game_indices
+                                                        ; let i = index">
+                                            <th scope="row">{{ gameIndex.generation.name | uppercase }}</th>
+                                            <td>{{ gameIndex.game_index }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <!-- LANGUAGES -->
+                <div class="col-12 mb-4">
+                    <ul class="list-group">
+                        <li class="list-group-item px-0 pb-0">
+                            <div class="d-flex flex-column">
+                                <div class="fw-bold mb-2">Name in different languages</div>
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th scope="col">Language</th>
+                                            <th scope="col">Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let thisName of type.names
+                                        ; let i = index">
+                                            <th scope="row" [ngSwitch]="thisName.language.name"
+                                                *ngIf="thisName.language.name != 'ja'">
+                                                <span *ngSwitchCase="'ja-Hrkt'">Japanese</span>
+                                                <span *ngSwitchCase="'ko'">Korean</span>
+                                                <span *ngSwitchCase="'zh-Hant'">Cantonese</span>
+                                                <span *ngSwitchCase="'fr'">French</span>
+                                                <span *ngSwitchCase="'de'">German</span>
+                                                <span *ngSwitchCase="'es'">Spanish</span>
+                                                <span *ngSwitchCase="'it'">Italian</span>
+                                                <span *ngSwitchCase="'en'">English</span>
+                                                <span *ngSwitchCase="'zh-Hans'">Mandarin</span>
+                                            </th>
+                                            <td *ngIf="thisName.language.name != 'ja'">{{ thisName.name }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -26,10 +26,7 @@ export class MoveComponent implements OnInit {
             this.move = data
             this.replaceHyphens();
             console.log(this.move);
-
         })
-
-
     }
 
     // Replaces potential hyphens into spaces
@@ -64,15 +61,27 @@ export class MoveComponent implements OnInit {
     }
 
     getPreviousMove() {
-        this.router.navigateByUrl("/move/" + (this.id - 1)).then(() => {
-            window.location.reload();
-        });
+        if (this.id != 1 && this.id != 10001) {
+            this.router.navigateByUrl("/move/" + (this.id - 1)).then(() => {
+                window.location.reload();
+            });
+        } else if (this.id == 10001) {
+            this.router.navigateByUrl("/move/902").then(() => {
+                window.location.reload();
+            });
+        }
     }
 
     getNextMove() {
-        this.router.navigateByUrl("/move/" + (this.id + 1)).then(() => {
-            window.location.reload();
-        });
+        if (this.id != 902 && this.id != 10018) {
+            this.router.navigateByUrl("/move/" + (this.id + 1)).then(() => {
+                window.location.reload();
+            });
+        } else if (this.id == 902) {
+            this.router.navigateByUrl("/move/10001").then(() => {
+                window.location.reload();
+            });
+        }
     }
 
 }

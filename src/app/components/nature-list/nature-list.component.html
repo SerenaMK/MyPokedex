@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-12">
+        <!-- TITLE -->
+        <h1 class="text-danger fw-bold">Natures</h1>
+        <!-- NUMBER OF NATURES -->
+        <p class="pt-2 fs-5">
+            Number of Natures: <b>{{ natures.count }}</b>
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <!-- LIST OF NATURES -->
+        <div class="list-group">
+            <a class="list-group-item list-group-item-action" *ngFor="let thisNature of natures.results; let i = index" routerLink="/nature/{{ (thisNature.url).slice(33, (thisNature.url).length-1) }}">
+
+                <!-- Number -->
+                <span class="badge bg-danger-subtle text-danger rounded-pill">
+                    # {{ (thisNature.url).slice(33, (thisNature.url).length-1) }}
+                </span>
+                <!-- Name -->
+                {{ thisNature.name | titlecase }}
+
+            </a>
+        </div>
+    </div>
+</div>

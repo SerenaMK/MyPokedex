@@ -76,15 +76,27 @@ export class ItemComponent implements OnInit {
     }
 
     getPreviousItem() {
-        this.router.navigateByUrl("/item/" + (this.id - 1)).then(() => {
-            window.location.reload();
-        });
+        if (this.id != 1 && this.id != 10001) {
+            this.router.navigateByUrl("/item/" + (this.id - 1)).then(() => {
+                window.location.reload();
+            });
+        } else if (this.id == 10001) {
+            this.router.navigateByUrl("/item/2099").then(() => {
+                window.location.reload();
+            });
+        }
     }
 
     getNextItem() {
-        this.router.navigateByUrl("/item/" + (this.id + 1)).then(() => {
-            window.location.reload();
-        });
+        if (this.id != 2099 && this.id != 10002) {
+            this.router.navigateByUrl("/item/" + (this.id + 1)).then(() => {
+                window.location.reload();
+            });
+        } else if (this.id == 2099) {
+            this.router.navigateByUrl("/item/10001").then(() => {
+                window.location.reload();
+            });
+        }
     }
 
 }
