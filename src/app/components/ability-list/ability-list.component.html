@@ -22,15 +22,38 @@
 <div class="row">
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
-            <li class="page-item" (click)="getPreviousPage()">
+            <!-- Previous Page -->
+            <li class="page-item" (click)="getPreviousPage()" [ngClass]="{ 'disabled' : thisPageOffset == 0 }">
                 <a class="page-link" style="cursor: pointer">Previous</a>
             </li>
-            <li class="page-item" (click)="getNextPage()">
+            <!-- First -->
+            <li class="page-item" (click)="goToPage(1)" [ngClass]="{ 'disabled' : thisPageOffset == 0 }">
+                <a class="page-link" style="cursor: pointer">&laquo;</a>
+            </li>
+            <!-- Page A -->
+            <li class="page-item" (click)="getPageA()" [ngClass]="{ 'active' : thisPageOffset == 0 }">
+                <a class="page-link" style="cursor: pointer">{{ pagination[0].number }}</a>
+            </li>
+            <!-- Page B -->
+            <li class="page-item" (click)="getPageB()" [ngClass]="{ 'active' : thisPageOffset == getOffset(pagination[1].link) }">
+                <a class="page-link" style="cursor: pointer">{{ pagination[1].number }}</a>
+            </li>
+            <!-- Page C -->
+            <li class="page-item" (click)="getPageC()" [ngClass]="{ 'active' : thisPageOffset == lastOffset }">
+                <a class="page-link" style="cursor: pointer">{{ pagination[2].number }}</a>
+            </li>
+            <!-- Last -->
+            <li class="page-item" (click)="goToPage(lastPage)" [ngClass]="{ 'disabled' : thisPageOffset == lastOffset }">
+                <a class="page-link" style="cursor: pointer">&raquo;</a>
+            </li>
+            <!-- Next Page -->
+            <li class="page-item" (click)="getNextPage()" [ngClass]="{ 'disabled' : thisPageOffset == lastOffset }">
                 <a class="page-link" style="cursor: pointer">Next</a>
             </li>
         </ul>
     </nav>
 </div>
+
 
 <div class="row">
     <div class="col-md-4 offset-md-4">
@@ -55,10 +78,32 @@
 <div class="row pt-4">
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
-            <li class="page-item" (click)="getPreviousPage()">
+            <!-- Previous Page -->
+            <li class="page-item" (click)="getPreviousPage()" [ngClass]="{ 'disabled' : thisPageOffset == 0 }">
                 <a class="page-link" style="cursor: pointer">Previous</a>
             </li>
-            <li class="page-item" (click)="getNextPage()">
+            <!-- First -->
+            <li class="page-item" (click)="goToPage(1)" [ngClass]="{ 'disabled' : thisPageOffset == 0 }">
+                <a class="page-link" style="cursor: pointer">&laquo;</a>
+            </li>
+            <!-- Page A -->
+            <li class="page-item" (click)="getPageA()" [ngClass]="{ 'active' : thisPageOffset == 0 }">
+                <a class="page-link" style="cursor: pointer">{{ pagination[0].number }}</a>
+            </li>
+            <!-- Page B -->
+            <li class="page-item" (click)="getPageB()" [ngClass]="{ 'active' : thisPageOffset == getOffset(pagination[1].link) }">
+                <a class="page-link" style="cursor: pointer">{{ pagination[1].number }}</a>
+            </li>
+            <!-- Page C -->
+            <li class="page-item" (click)="getPageC()" [ngClass]="{ 'active' : thisPageOffset == lastOffset }">
+                <a class="page-link" style="cursor: pointer">{{ pagination[2].number }}</a>
+            </li>
+            <!-- Last -->
+            <li class="page-item" (click)="goToPage(lastPage)" [ngClass]="{ 'disabled' : thisPageOffset == lastOffset }">
+                <a class="page-link" style="cursor: pointer">&raquo;</a>
+            </li>
+            <!-- Next Page -->
+            <li class="page-item" (click)="getNextPage()" [ngClass]="{ 'disabled' : thisPageOffset == lastOffset }">
                 <a class="page-link" style="cursor: pointer">Next</a>
             </li>
         </ul>

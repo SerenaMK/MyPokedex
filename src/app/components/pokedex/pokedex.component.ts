@@ -77,7 +77,7 @@ export class PokedexComponent implements OnInit {
     }
     getNextPage() {
         if (this.thisPageOffset != 0 && this.thisPageOffset != this.lastOffset) {
-        // if (this.thisPageOffset != 0) {
+            // if (this.thisPageOffset != 0) {
             this.pokedexService.getPage(this.pagination[2].link).subscribe(data => {
                 this.pokemon = data
                 this.thisPageOffset = this.getOffset(this.pagination[2].link)
@@ -123,17 +123,21 @@ export class PokedexComponent implements OnInit {
         })
     }
     getPageC() {
-        this.pokedexService.getPage(this.pagination[2].link).subscribe(data => {
-            this.pokemon = data
-            this.thisPageOffset = this.getOffset(this.pagination[2].link)
-            this.pagination[0].number += 1
-            this.pagination[1].number += 1
-            this.pagination[2].number += 1
-            this.pagination[0].link = this.getPage(this.thisPageOffset - 20)
-            this.pagination[1].link = this.getPage(this.thisPageOffset)
-            this.pagination[2].link = this.getPage(this.thisPageOffset + 20)
-            this.replaceHyphens()
-        })
+        if (this.thisPageOffset != this.lastOffset) {
+            this.pokedexService.getPage(this.pagination[2].link).subscribe(data => {
+                this.pokemon = data
+                this.thisPageOffset = this.getOffset(this.pagination[2].link)
+                if (this.pagination[2].number != this.lastPage) {
+                    this.pagination[0].number += 1
+                    this.pagination[1].number += 1
+                    this.pagination[2].number += 1
+                    this.pagination[0].link = this.getPage(this.thisPageOffset - 20)
+                    this.pagination[1].link = this.getPage(this.thisPageOffset)
+                    this.pagination[2].link = this.getPage(this.thisPageOffset + 20)
+                }
+                this.replaceHyphens()
+            })
+        }
     }
 
     onSubmit() {
@@ -201,7 +205,48 @@ export class PokedexComponent implements OnInit {
         }
 
         this.lastOffset = Math.trunc(divided) * 20
+    }
 
+    goToPage(num: number) {
+        let off = (num - 1) * 20
+
+        if (off == this.lastOffset) {
+            this.pokedexService.getPage(this.getPage(off)).subscribe(data => {
+                this.pokemon = data
+                this.thisPageOffset = off
+                this.pagination[0].number = num - 2
+                this.pagination[1].number = num - 1
+                this.pagination[2].number = num
+                this.pagination[0].link = this.getPage(off - 40)
+                this.pagination[1].link = this.getPage(off - 20)
+                this.pagination[2].link = this.getPage(off)
+                this.replaceHyphens()
+            })
+        } else if (off == 0) {
+            this.pokedexService.getPage(this.getPage(off)).subscribe(data => {
+                this.pokemon = data
+                this.thisPageOffset = off
+                this.pagination[0].number = num
+                this.pagination[1].number = num + 1
+                this.pagination[2].number = num + 2
+                this.pagination[0].link = this.getPage(off)
+                this.pagination[1].link = this.getPage(off + 20)
+                this.pagination[2].link = this.getPage(off + 40)
+                this.replaceHyphens()
+            })
+        } else {
+            this.pokedexService.getPage(this.getPage(off)).subscribe(data => {
+                this.pokemon = data
+                this.thisPageOffset = off
+                this.pagination[0].number = num - 1
+                this.pagination[1].number = num
+                this.pagination[2].number = num + 1
+                this.pagination[0].link = this.getPage(off - 20)
+                this.pagination[1].link = this.getPage(off)
+                this.pagination[2].link = this.getPage(off + 20)
+                this.replaceHyphens()
+            })
+        }
     }
 
 }
